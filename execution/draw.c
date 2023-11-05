@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:10 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/05 22:30:11 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/05 22:40:38 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void draw_line_pixel(t_raycast *rc, t_info *dt, int x)
     while(y < rc->start)
     {
         // printf("%d ||  %d  || %d || %d\n", y, rc->start, rc->end, HEIGHT);
-        put_pixel_in_img(dt, x, y, 723802);
+        put_pixel_in_img(dt, x, y, 1703935);
         y++;    
     }
     while(y < rc->end)
-        put_pixel_in_img(dt, x, y++, 743986);
+        put_pixel_in_img(dt, x, y++, 143986);
     while(y < HEIGHT)
-        put_pixel_in_img(dt, x, y++, 4142863);
+        put_pixel_in_img(dt, x, y++, 2142863);
 }
