@@ -6,42 +6,14 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:21 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/05 22:30:22 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/06 05:08:31 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
- int         worldMap1[MAPWIDTH][MAPHEIGHT]=
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-
-void  move(t_info *dt)
+void  move(t_map_info *mp)
 {
     double dx;
     double dy;
@@ -50,80 +22,76 @@ void  move(t_info *dt)
     dx = 0.0;
     dy = 0.0;
     mvspeed = 0.0;
-    if(dt->key == A_KEY)
+    if(mp->key == UP_KEY)
     {
         mvspeed = MVSPEED * (-1.0);
-        dx += dt->dirx *mvspeed;
-        dy += dt->diry *mvspeed;
+        dx += mp->info_player->dirx *mvspeed;
+        dy += mp->info_player->diry *mvspeed;
     }
-    if(dt->key == D_KEY)
+    if(mp->key == DOWN_KEY)
     {
         mvspeed = MVSPEED * (1.0);
-        dx += dt->dirx *mvspeed;
-        dy += dt->diry *mvspeed;
+        dx += mp->info_player->dirx *mvspeed;
+        dy += mp->info_player->diry *mvspeed;
     }
-    if(dt->key == W_KEY)
+    if(mp->key == LEFT_KEY)
     {
         mvspeed = MVSPEED * (-1.0);
-        dx += dt->planex *mvspeed;
-        dy += dt->planey *mvspeed;
+       dx += mp->info_player->dirx;
+        dy += mp->info_player->diry;
     }
-    if(dt->key == S_KEY)
+    if(mp->key == RIGHT_KEY)
     {
         mvspeed = MVSPEED * (1.0);
-        dx += dt->planex *mvspeed;
-        dy += dt->planey *mvspeed;
+        dx += mp->info_player->planex;
+        dy += mp->info_player->planey;
     }
-    if(worldMap1[(int)(dt->posx + dx)][(int)(dt->posy + dy)] != 0)
+    if(mp->map[(int)(mp->info_player->x_pos + dx)][(int)(mp->info_player->y_pos + dy)] != '0')
         return ;
-    dt->posx +=dx;
-    dt->posy +=dy;
+    mp->info_player->x_pos +=dx;
+    mp->info_player->y_pos +=dy;
 }
 
-void  rotation(t_info *dt)
+void  rotation(t_map_info *mp)
 {
     double rotspeed;
     double dir_new_x;
 
     rotspeed = ROTSPEED;
-    if(dt->key == RIGHT_KEY)
+    if(mp->key == RIGHT_KEY)
         rotspeed = -ROTSPEED;
-    dir_new_x = dt->dirx;
-    dt->dirx = dir_new_x * cos(rotspeed) - dt->diry * sin(rotspeed);
-    dt->diry = dir_new_x * sin(rotspeed) + dt->diry * cos(rotspeed);
-    dir_new_x = dt->planex;
-    dt->planex = dir_new_x * cos(rotspeed) - dt->planey * sin(rotspeed);
-    dt->planey = dir_new_x * sin(rotspeed) + dt->planey * cos(rotspeed);
+    dir_new_x = mp->info_player->dirx;
+    mp->info_player->dirx = dir_new_x * cos(rotspeed) - mp->info_player->diry * sin(rotspeed);
+    mp->info_player->diry = dir_new_x * sin(rotspeed) + mp->info_player->diry * cos(rotspeed);
+    dir_new_x = mp->info_player->planex;
+    mp->info_player->planex = dir_new_x * cos(rotspeed) - mp->info_player->planey * sin(rotspeed);
+    mp->info_player->planey = dir_new_x * sin(rotspeed) + mp->info_player->planey * cos(rotspeed);
 }
 
-int     close_win(t_info *dt)
+int     close_win(t_map_info *mp)
 {
-    if(dt->img->ptr)
-        free(dt->img->ptr);
+    if(mp->img->ptr)
+        free(mp->img->ptr);
     exit(0);
     return (0);
 }
-int key_definie(int key, t_info *dt)
+int key_definie(int key, t_map_info *mp)
 {
     if(key == ESC_KEY)
-        close_win(dt);
-    else if(key == A_KEY)
-        dt->key = A_KEY;
-    else if(key == D_KEY)
-        dt->key = D_KEY;
-    else if(key == W_KEY)
-        dt->key = W_KEY;
-    else if(key == S_KEY)
-        dt->key = S_KEY;
+        close_win(mp);
+    else if(key == UP_KEY)
+        mp->key = UP_KEY;
+    else if(key == DOWN_KEY)
+        mp->key = DOWN_KEY;
     else if(key == LEFT_KEY)
-        dt->key = LEFT_KEY;
+        mp->key = LEFT_KEY;
     else if(key == RIGHT_KEY)
-        dt->key = RIGHT_KEY;
+        mp->key = RIGHT_KEY;
     else
         return (0);
-    move(dt);
-    rotation(dt);
-    raycast_data(dt);
+    move(mp);
+    rotation(mp);
+    raycast_data(mp);
     return(0);
     
 }

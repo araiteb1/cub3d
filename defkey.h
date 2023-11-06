@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:04 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/05 22:30:05 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/06 05:06:56 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 #define DEFKEY_H
 
 
-#define A_KEY   0
-#define S_KEY   1
-#define D_KEY   2
-#define W_KEY   13
-#define LEFT_KEY   123
+#define UP_KEY  126
+#define DOWN_KEY   125
 #define ESC_KEY   53
+#define LEFT_KEY   123
 #define RIGHT_KEY   124
 
 #endif
