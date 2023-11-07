@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/06 05:03:17 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/07 05:30:37 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ int main(int ac, char **av)
 		init_player(&map_info);
 		init_data_ray(map_info->info_player);
 		raycast_data(map_info);
-    	mlx_hook(map_info->win, 2, 0, key_definie, map_info);
-		mlx_hook(map_info->win, 17, 0, close_win, map_info);
+    	// mlx_hook(map_info->win, 2, 0, key_definie, map_info);
+		// mlx_hook(map_info->win, 17, 0, close_win, map_info);
 		// init_rays(&map_info);
 		// castAllrays(&map_info);
+		mlx_loop_hook(map_info->mlx, key_definie, map_info);
 		// mlx_loop_hook(map_info->mlx, key_hook, map_info);
 		mlx_loop(map_info->mlx);
 		/*************************************************/

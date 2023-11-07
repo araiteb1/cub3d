@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:18:30 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/06 03:38:16 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/07 03:09:20 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,10 @@ void init_map(t_map_info **map_info, char *fileName)
 
 void init_mlx(t_map_info *map_info)
 {
-	map_info->mlx = mlx_init();
-	map_info->win = mlx_new_window(map_info->mlx, WIDTH, HEIGHT, "win");
-	map_info->img = (t_imag *)malloc(sizeof(t_imag));
-	map_info->img->ptr= mlx_new_image(map_info->mlx, WIDTH, HEIGHT);
-  	if (!map_info->img->ptr)
-    	exit (1);
-  	map_info->img->data = mlx_get_data_addr(map_info->img->ptr, &map_info->img->bits_of_pixel, &map_info->img->size_line,&map_info->img->end);
-	// mlx_image_to_window(map_info->mlx, map_info->img, 0, 0);
+	map_info->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	// map_info->win = mlx_new_window(map_info->mlx, WIDTH, HEIGHT, "win");
+	map_info->img = mlx_new_image(map_info->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(map_info->mlx, map_info->img, 0, 0);
 }
 
 

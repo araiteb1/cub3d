@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/06 04:48:01 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/07 05:33:09 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,27 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-#include "defkey.h"
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
-// # include "./libmlx42/includes/MLX42.h"
-#include<mlx.h>
+# include "./libmlx42/includes/MLX42.h"
 
 # define WIDTH 2000
 # define HEIGHT 1000
 # define TILE_SIZE 64
 
-# define MVSPEED			0.5
-# define ROTSPEED			0.3
+# define MVSPEED			0.1
+# define ROTSPEED			0.1
 
 #define MINIMAP_SCALE_FACTOR 2
 
-#define KEY_RIGHT 124
-#define KEY_LEFT 123
-#define KEY_UP 126
-#define KEY_DOWN 125
-#define KEY_ESC 53
+#define TEXWIDTH 64
+#define TEXHEIGHT 64
+
+#define KEY_RIGHT 262
+#define KEY_LEFT 263
+#define KEY_UP 264
+#define KEY_DOWN 265
+#define KEY_ESC 256
 
 #define COLOR_RED 0xFF0000FF
 #define COLOR_GREEN 0x0000FF00
@@ -68,7 +69,7 @@ typedef struct s_player
 	double y_pos;
 	double x;
 	double y;
-	 double         dirx;
+	double         dirx;
     double         diry;
     double         planex;
     double         planey;
@@ -77,19 +78,10 @@ typedef struct s_player
 	double rotationSpeed;
 	double fieldOfView;
 	double num_rays;
+	// t_imag	*textur[4];
 	t_ray *rays;
 }	t_player;
 
-typedef struct s_imag
-{
-	int		width;
-	int		height;
-	int		bits_of_pixel;
-	int		size_line;
-	int		end;
-	void	*ptr;
-	char	*data;
-}	t_imag;
 
 typedef struct	s_map_info
 {
@@ -107,9 +99,14 @@ typedef struct	s_map_info
 	char *fileName;
 	t_player		*info_player;
 	t_ray 			*rays;
-	void 			*mlx;
-	t_imag		*img;
-	void		*win;
+	mlx_t 			*mlx;
+	mlx_image_t		*img;
+	double		pos_tex;
+	double		step_tex;
+	int			x_tex;
+	int			y_tex;
+	// t_imag		*texture;
+	// void		*win;
 	int key;
 }	t_map_info;
 typedef struct s_raycast
@@ -222,12 +219,14 @@ void raycast_data(t_map_info *mp);
 void  draw_line(t_raycast *rc);
 void  add_algo(t_raycast *rc, t_map_info *mp);
 void  get_side_dist(t_map_info *mp, t_raycast *rc);
-void  get_coordinate(t_raycast *rc, int x, t_player *dt);
+void  get_coordinate(t_raycast *rc, int x, t_map_info *mp);
 void  init_data_ray(t_player *dt);
 void draw_line_pixel(t_raycast *rc, t_map_info *mp, int x);
 //hook
-void  move(t_map_info *mp);
+// void  move(t_map_info *mp);
 void  rotation(t_map_info *mp);
 int     close_win(t_map_info *mp);
-int key_definie(int key, t_map_info *mp);
+void key_definie(void *ptr);
+int color_for_tex(t_map_info *mp);
+void    init_data_tex(t_raycast *rc, t_map_info *mp);
 #endif

@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/06 05:00:51 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/07 05:11:22 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void  init_data_ray(t_player *dt)
   dt->planey = 0.66;
 
 }
-void  get_coordinate(t_raycast *rc, int x, t_player *dt)
+void  get_coordinate(t_raycast *rc, int x, t_map_info *mp)
 {
   rc->camerax = (2.0 * x )/ (WIDTH - 1.0);
-  rc->raydirx = dt->dirx + dt->planex * rc->camerax;
-  rc->raydiry = dt->diry + dt->planey * rc->camerax;
-  rc->mapx = (int)dt->y_pos;
-  rc->mapy = (int)dt->x_pos;
+  rc->raydirx = mp->info_player->dirx + mp->info_player->planex * rc->camerax;
+  rc->raydiry = mp->info_player->diry + mp->info_player->planey * rc->camerax;
+  rc->mapx = (int)mp->info_player->y_pos;
+  rc->mapy = (int)mp->info_player->x_pos;
   rc->deltadistx = fabs(1/rc->raydirx);
   if(rc->raydirx == 0)
     rc->deltadistx = 1e30;
@@ -38,7 +38,7 @@ void  get_coordinate(t_raycast *rc, int x, t_player *dt)
   rc->stepx = 0;
   rc->stepy = 0;
   rc->hit = 0;
-
+  // mp->texture = NULL; 
 }
 
 void  get_side_dist(t_map_info *mp, t_raycast *rc)
@@ -102,6 +102,7 @@ void  draw_line(t_raycast *rc)
 
 }
 
+
 void raycast_data(t_map_info *mp)
 {
   int x;
@@ -110,15 +111,17 @@ void raycast_data(t_map_info *mp)
     if(!rc)
       return ;
   x = 0;
+  mlx_delete_image(mp->mlx, mp->img);
+	mp->img = mlx_new_image(mp->mlx, WIDTH, HEIGHT);
   while(x < WIDTH)
   {
-    get_coordinate(rc, x, mp->info_player);
+    get_coordinate(rc, x, mp);
     get_side_dist(mp, rc);
     add_algo(rc, mp);
     draw_line(rc);
     draw_line_pixel(rc, mp, x);
     x++;
   }
-  mlx_put_image_to_window(mp->mlx, mp->win, mp->img->ptr, 0, 0);
+  mlx_image_to_window(mp->mlx , mp->img, 0, 0);
 }
            

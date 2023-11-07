@@ -6,7 +6,7 @@
 #    By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/06 04:48:52 by araiteb          ###   ########.fr        #
+#    Updated: 2023/11/07 04:03:15 by araiteb          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,17 @@ CC = cc
 INCLUDES=.
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
-LDIR=-L /usr/local/lib/
-LIBS=-lmlx -framework OpenGL -framework AppKit
+# LDIR=-L /usr/local/lib/
+# LIBS=-lmlx -framework OpenGL -framework AppKit
 
 # LIBS   = libmlx42/libmlx42.a -ldl -lglfw -pthread -lm
 
+LIBMLX = $(HOME)/MLX42
+
+LIBS   = libmlx42/libmlx42.a -ldl -lglfw -pthread -lm
+
 NAME_FRAME_WORK = -framework Cocoa -framework OpenGL -framework IOKit
+
 
 GLFWLIB := $(HOME)/.brew/opt/glfw/lib
 
@@ -40,7 +45,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C ./libft
-	$(CC) $(CFLAGS) $(LIBS) $(NAME_FRAME_WORK) -I$(GLFWLIB) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBS) $(NAME_FRAME_WORK) -L$(GLFWLIB) $(OBJS) $(LIBFT) -o $(NAME)
 
 %.o: %.c 
 	$(CC) $(CFLAGS) -c $< -o $@
