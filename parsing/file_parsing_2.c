@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   file_parsing_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:33:25 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/10/22 13:33:36 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/09 21:40:03 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int check_textures(t_map_info **map_info)
+int check_textures(t_map_info *map_info)
 {
-    if (!(*map_info)->no_texture || !(*map_info)->so_texture
-        || !(*map_info)->we_texture || !(*map_info)->ea_texture
-            || !(*map_info)->c_texture || !(*map_info)->f_texture)
+    if (!map_info->no_texture || !map_info->so_texture
+        || !map_info->we_texture || !map_info->ea_texture
+            || !map_info->c_texture || !map_info->f_texture)
                 return (0);
 	return (1);
 }
@@ -41,33 +41,33 @@ int check_line_of_map(char *line)
 	return (1);
 }
 
-int skip_textures(t_map_info **map_info, char *line)
+int skip_textures(t_map_info *map_info, char *line)
 {
 	if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-	if (ft_strcmp(line, (*map_info)->no_texture))
+	if (ft_strcmp(line, map_info->no_texture))
 		return (1);
-	else if (ft_strcmp(line, (*map_info)->so_texture))
+	else if (ft_strcmp(line, map_info->so_texture))
 		return (1);
-	else if (ft_strcmp(line, (*map_info)->we_texture))
+	else if (ft_strcmp(line, map_info->we_texture))
 		return (1);
-	else if (ft_strcmp(line, (*map_info)->ea_texture))
+	else if (ft_strcmp(line, map_info->ea_texture))
 		return (1);
-	else if (ft_strcmp(line, (*map_info)->c_texture))
+	else if (ft_strcmp(line, map_info->c_texture))
 		return (1);
-	else if (ft_strcmp(line, (*map_info)->f_texture))
+	else if (ft_strcmp(line, map_info->f_texture))
 		return (1);
 	return (0);
 }
 
 
 
-int  count_lines(int fd, t_map_info **map_info)
+int  count_lines(int fd, t_map_info *map_info)
 {
 	char *line;
 	int size_map;
 	
-	fd = open((*map_info)->fileName, O_RDONLY);
+	fd = open(map_info->fileName, O_RDONLY);
 	if (fd == -1)
 		writing_error("Failed to open file");
 	line = get_next_line(fd);
@@ -95,13 +95,13 @@ int  count_lines(int fd, t_map_info **map_info)
 	return (size_map);
 }
 
-void read_map(int fd, t_map_info **map_info)
+void read_map(int fd, t_map_info *map_info)
 {
 	char *line;
 	int len;
 	int size_map;
 	
-	fd = open((*map_info)->fileName, O_RDONLY);
+	fd = open(map_info->fileName, O_RDONLY);
 	if (fd == -1)
 		writing_error("Failed to open file");
 	line = get_next_line(fd);
@@ -116,8 +116,8 @@ void read_map(int fd, t_map_info **map_info)
 			break;
 	}
 	size_map = 0;
-	(*map_info)->num_lines = count_lines(fd, map_info);
-	(*map_info)->map = malloc(sizeof(char *) * ((*map_info)->num_lines + 1));
+	map_info->num_lines = count_lines(fd, map_info);
+	map_info->map = malloc(sizeof(char *) * (map_info->num_lines + 1));
 	while (line)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -125,10 +125,10 @@ void read_map(int fd, t_map_info **map_info)
 		len = ft_strlen(line);
 		while (len > 0 && line[len - 1] == ' ')
 			len--;
-		(*map_info)->map[size_map] = ft_substr(line, 0, len);
+		map_info->map[size_map] = ft_substr(line, 0, len);
 		size_map++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	(*map_info)->map[count_lines(fd, map_info)] = NULL;
+	map_info->map[count_lines(fd, map_info)] = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:18:30 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/07 03:09:20 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/09 02:43:06 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,41 +40,44 @@ void free_map_info(t_map_info *map_info)
 void printMap(t_map_info *map_info)
 {
 	int i = 0;
-	printf("hello from printMap\n");
-	printf("no_texture: %s\n", map_info->no_texture);
-	printf("so_texture: %s\n", map_info->so_texture);
-	printf("we_texture: %s\n", map_info->we_texture);
-	printf("ea_texture: %s\n", map_info->ea_texture);
-	printf("c_texture: %s\n", map_info->c_texture);
-	printf("f_texture: %s\n", map_info->f_texture);
-    printf("c_color: %d\n", map_info->c_color);
-    printf("f_color: %d\n", map_info->f_color);
-	printf("Map: {%p}\n", &map_info->map[i]);
-	printf("********************************************************************\n");
+	//printf("hello from printMap\n");
+	//printf("no_texture: %s\n", map_info->no_texture);
+	//printf("so_texture: %s\n", map_info->so_texture);
+	//printf("we_texture: %s\n", map_info->we_texture);
+	//printf("ea_texture: %s\n", map_info->ea_texture);
+	//printf("c_texture: %s\n", map_info->c_texture);
+	//printf("f_texture: %s\n", map_info->f_texture);
+    //printf("c_color: %d\n", map_info->c_color);
+    //printf("f_color: %d\n", map_info->f_color);
+	//printf("Map: {%p}\n", &map_info->map[i]);
+	//printf("********************************************************************\n");
 	while (map_info->map[i])
 	{
-		printf("|%s|\n", map_info->map[i]);
+		//printf("|%s|\n", map_info->map[i]);
 		i++;
 	}
 }
 
-void init_map(t_map_info **map_info, char *fileName)
+t_map_info *init_map(char *fileName)
 {
-    (*map_info) = malloc(sizeof(t_map_info));
-    if (!(*map_info))
+	t_map_info *map_info;
+
+    map_info = malloc(sizeof(t_map_info));
+    if (!map_info)
         writing_error("Failed to allocate memory");
-    (*map_info)->no_texture = NULL;
-	(*map_info)->so_texture = NULL;
-	(*map_info)->we_texture = NULL;
-	(*map_info)->ea_texture = NULL;
-	(*map_info)->c_texture = NULL;
-	(*map_info)->f_texture = NULL;
-	(*map_info)->c_color = -1;
-	(*map_info)->f_color = -1;
-	(*map_info)->map = NULL;
-	(*map_info)->num_lines = 0;
-	(*map_info)->num_cols = 0;
-	(*map_info)->fileName = fileName;
+    map_info->no_texture = NULL;
+	map_info->so_texture = NULL;
+	map_info->we_texture = NULL;
+	map_info->ea_texture = NULL;
+	map_info->c_texture = NULL;
+	map_info->f_texture = NULL;
+	map_info->c_color = -1;
+	map_info->f_color = -1;
+	map_info->map = NULL;
+	map_info->num_lines = 0;
+	map_info->num_cols = 0;
+	map_info->fileName = fileName;
+	return map_info;
 }
 
 void init_mlx(t_map_info *map_info)

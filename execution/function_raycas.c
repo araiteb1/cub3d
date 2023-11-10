@@ -6,28 +6,22 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/07 05:11:22 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/10 05:38:11 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 # include "../cub3d.h"
 
-void  init_data_ray(t_player *dt)
-{
-  dt->dirx = -1;
-  dt->diry = 0;
-  dt->planex = 0;
-  dt->planey = 0.66;
-
-}
 void  get_coordinate(t_raycast *rc, int x, t_map_info *mp)
 {
-  rc->camerax = (2.0 * x )/ (WIDTH - 1.0);
+  rc->camerax = 2.0 * x  / WIDTH - 1.0;
   rc->raydirx = mp->info_player->dirx + mp->info_player->planex * rc->camerax;
   rc->raydiry = mp->info_player->diry + mp->info_player->planey * rc->camerax;
-  rc->mapx = (int)mp->info_player->y_pos;
-  rc->mapy = (int)mp->info_player->x_pos;
+  rc->mapx = (int)mp->info_player->x_pos;
+  rc->mapy = (int)mp->info_player->y_pos;
+  rc->sidedistx = 0.0;
+  rc->sidedisty = 0.0;
   rc->deltadistx = fabs(1/rc->raydirx);
   if(rc->raydirx == 0)
     rc->deltadistx = 1e30;
@@ -37,8 +31,8 @@ void  get_coordinate(t_raycast *rc, int x, t_map_info *mp)
   rc->perp_walldist = 0.0;
   rc->stepx = 0;
   rc->stepy = 0;
-  rc->hit = 0;
-  // mp->texture = NULL; 
+  mp->textur = NULL;
+
 }
 
 void  get_side_dist(t_map_info *mp, t_raycast *rc)
@@ -67,41 +61,60 @@ void  get_side_dist(t_map_info *mp, t_raycast *rc)
 
 void  add_algo(t_raycast *rc, t_map_info *mp)
 {
-  while(rc->hit == 0)
+  int	hit;
+
+	hit = 0;
+  while(hit == 0)
   {
     if(rc->sidedistx < rc->sidedisty)
     {
       rc->sidedistx += rc->deltadistx;
       rc->mapx += rc->stepx;
-      rc->side = 0;
+      mp->textur = ft_strdup(mp->so_texture);
+      if(rc->raydirx > 0)
+        mp->textur = mp->no_texture;
     }
     else
     {
       rc->sidedisty += rc->deltadisty;
       rc->mapy += rc->stepy;
-      rc->side = 1;
+      mp->textur = mp->we_texture;
+      if(rc->raydiry > 0)
+        mp->textur = mp->ea_texture;
     }
-    if (mp->map[rc->mapx][rc->mapy] != '0')
-      rc->hit = 1;
+    if (mp->map1[rc->mapx][rc->mapy] > 0)
+      hit = 1;
   }
 }
 
-void  draw_line(t_raycast *rc)
+void  draw_line(t_raycast *rc, t_map_info *mp)
 {
-  if(rc->side == 0)
-    rc->perp_walldist = rc->sidedistx - rc->deltadistx;
-  else
-    rc->perp_walldist = rc->sidedisty - rc->deltadisty;
+  // printf("1===========>%f ||  %f\n",rc->sidedistx , rc->sidedisty );
+  // printf("1===========>%f ||  %f\n",rc->deltadistx , rc->deltadisty );
+  // printf("1===========>%s ||  %s || %s|| %s || %s\n",mp->textur , mp->no_texture, mp->so_texture, mp->ea_texture, mp->we_texture );
+  
+  // if (ft_strcmp(mp->textur , mp->no_texture)==0 || ft_strcmp(mp->textur , mp->so_texture) == 0)
+  if (mp->textur == mp->no_texture || mp->textur == mp->so_texture)
+		rc->perp_walldist = rc->sidedistx - rc->deltadistx;
+	else
+		rc->perp_walldist = rc->sidedisty - rc->deltadisty;
   rc->line = (int)(HEIGHT / rc->perp_walldist);
+  // printf("%d ||  %f\n",rc->line, rc->perp_walldist);
 	rc->start = -rc->line / 2.0 + HEIGHT / 2.0;
 	if (rc->start < 0)
 		rc->start = 0;
 	rc->end = rc->line / 2.0 + HEIGHT / 2.0;
 	if (rc->end >=HEIGHT)
 		rc->end = HEIGHT - 1;
-
+  if (mp->textur == mp->no_texture || mp->textur == mp->so_texture)
+  // if (ft_strcmp(mp->textur , mp->no_texture )== 0 || ft_strcmp(mp->textur , mp->so_texture) == 0)
+		rc->wallx = mp->info_player->y_pos + rc->perp_walldist * rc->raydiry;
+	else
+		rc->wallx = mp->info_player->x_pos + rc->perp_walldist * rc->raydirx;
+  rc->wallx -= floor(rc->wallx);
+  // printf("[%f]\n", rc->wallx);
+  // exit(0);
 }
-
 
 void raycast_data(t_map_info *mp)
 {
@@ -110,18 +123,20 @@ void raycast_data(t_map_info *mp)
   rc = (t_raycast *)malloc (sizeof(t_raycast));
     if(!rc)
       return ;
-  x = 0;
+  x = -1;
   mlx_delete_image(mp->mlx, mp->img);
 	mp->img = mlx_new_image(mp->mlx, WIDTH, HEIGHT);
-  while(x < WIDTH)
+  while(++x < WIDTH)
   {
     get_coordinate(rc, x, mp);
     get_side_dist(mp, rc);
     add_algo(rc, mp);
-    draw_line(rc);
+    draw_line(rc, mp);
     draw_line_pixel(rc, mp, x);
-    x++;
   }
   mlx_image_to_window(mp->mlx , mp->img, 0, 0);
+  free(rc);
+  // free_map(mp->map);
+  // free_map_info(mp);
 }
            

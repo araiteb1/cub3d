@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/07 05:33:09 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/10 02:28:26 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "./get_next_line/get_next_line.h"
 # include "./libmlx42/includes/MLX42.h"
 
-# define WIDTH 2000
-# define HEIGHT 1000
+# define WIDTH 1280
+# define HEIGHT 720
 # define TILE_SIZE 64
 
 # define MVSPEED			0.1
@@ -36,11 +36,6 @@
 #define TEXWIDTH 64
 #define TEXHEIGHT 64
 
-#define KEY_RIGHT 262
-#define KEY_LEFT 263
-#define KEY_UP 264
-#define KEY_DOWN 265
-#define KEY_ESC 256
 
 #define COLOR_RED 0xFF0000FF
 #define COLOR_GREEN 0x0000FF00
@@ -86,6 +81,9 @@ typedef struct s_player
 typedef struct	s_map_info
 {
 	char **map;
+	int **map1;
+	int map1_height;
+	int map1_width;
 	int num_lines;
 	int num_cols;
 	char *no_texture;
@@ -105,9 +103,8 @@ typedef struct	s_map_info
 	double		step_tex;
 	int			x_tex;
 	int			y_tex;
-	// t_imag		*texture;
-	// void		*win;
-	int key;
+	char		*textur;
+	mlx_image_t		*texture;
 }	t_map_info;
 typedef struct s_raycast
 {
@@ -133,14 +130,14 @@ typedef struct s_raycast
 
 /**************************************************************/
 // init_mlx.c
-void init_player(t_map_info **map_info);
-double playerAngle(t_map_info *map_info, int x, int y);
-void get_player_position(t_map_info **map_info, t_player **player);
+t_player *init_player(t_map_info *);
+double playerAngle(t_map_info *map_info);
+void get_player_position(t_map_info *map_info, t_player *player);
 void init_mlx(t_map_info *map_info);
 void printInfoPlayer(t_player *player);
 
 
-
+void	data_init_camera(t_map_info *mp, int , int ,char dir);
 // player_move.c
 void move_s(t_map_info *map_info, t_player **player);
 void move_w(t_map_info *map_info, t_player **player);
@@ -176,15 +173,15 @@ int isMapClosed(char **map, int num_lines);
 int get_numebr_player(char **map, int lineCount);
 
 // init_map.c
-void init_map(t_map_info **map_info, char *fileName);
+t_map_info *init_map(char *fileName);
 void free_map(char **map);
 void free_map_info(t_map_info *map_info);
 void parsing(t_map_info *map_info);
 void printMap(t_map_info *map_info);
 
 //file_parsing.c
-void read_textures(int fd, t_map_info **map_info);
-void fill_textures(t_map_info **map_info, char *line);
+void read_textures(int fd, t_map_info *map_info);
+void fill_textures(t_map_info *map_info, char *line);
 int valide_texture(char *line);
 int get_color(char *line);
 int free_colors(char **colors);
@@ -197,14 +194,14 @@ int ft_size_of_array(char **array);
 int count_number_of_commas(char *line);
 
 // file_parsing_2.c
-int check_textures(t_map_info **map_info);
-int count_lines(int fd, t_map_info **map_info);
-void read_map(int fd, t_map_info **map_info);
-int skip_textures(t_map_info **map_info, char *line);
+int check_textures(t_map_info *map_info);
+int count_lines(int fd, t_map_info *map_info);
+void read_map(int fd, t_map_info *map_info);
+int skip_textures(t_map_info *map_info, char *line);
 int check_line_of_map(char *line);
 
 // file_parsing_3.c
-void fill_map(t_map_info **map_info);
+void fill_map(t_map_info *map_info);
 int get_biggest_line(char **map);
 int surround_map(char **map, int num_lines);
 int check_all_spaces(char *line);
@@ -216,7 +213,7 @@ int check_all_spaces(char *line);
 // void rander_rays(t_map_info **map_info);
 //exec
 void raycast_data(t_map_info *mp);
-void  draw_line(t_raycast *rc);
+void  draw_line(t_raycast *rc, t_map_info *mp);
 void  add_algo(t_raycast *rc, t_map_info *mp);
 void  get_side_dist(t_map_info *mp, t_raycast *rc);
 void  get_coordinate(t_raycast *rc, int x, t_map_info *mp);
@@ -225,8 +222,9 @@ void draw_line_pixel(t_raycast *rc, t_map_info *mp, int x);
 //hook
 // void  move(t_map_info *mp);
 void  rotation(t_map_info *mp);
-int     close_win(t_map_info *mp);
+void     close_win(void *ptr);
 void key_definie(void *ptr);
 int color_for_tex(t_map_info *mp);
 void    init_data_tex(t_raycast *rc, t_map_info *mp);
+char 	*join_raw_map(t_map_info *mp);
 #endif

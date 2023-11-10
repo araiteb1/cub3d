@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:30:22 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/10/11 14:01:57 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/09 21:32:38 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int valide_texture(char *line)
 	return (free(tmp_line),0);
 }
 
-void fill_textures(t_map_info **map_info, char *line)
+void fill_textures(t_map_info *map_info, char *line)
 {
 	int i;
 	char *tmp_line;
@@ -94,29 +94,28 @@ void fill_textures(t_map_info **map_info, char *line)
 	
 	tmp_line = ft_substr(line, 0, i);
 	if(ft_strcmp(tmp_line, "NO"))
-		(*map_info)->no_texture = ft_strdup(line);
+		map_info->no_texture = ft_strdup(line);
 	else if(ft_strcmp(tmp_line, "SO"))
-	 	(*map_info)->so_texture = ft_strdup(line);
+	 	map_info->so_texture = ft_strdup(line);
 	else if(ft_strcmp(tmp_line, "WE"))
-	 	(*map_info)->we_texture = ft_strdup(line);
+	 	map_info->we_texture = ft_strdup(line);
 	else if(ft_strcmp(tmp_line, "EA"))
-	 	(*map_info)->ea_texture = ft_strdup(line);
+	 	map_info->ea_texture = ft_strdup(line);
 	else if(ft_strcmp(tmp_line, "C"))
 	{
-	 	(*map_info)->c_color = get_color(line);
-		(*map_info)->c_texture = ft_strdup(line);
+	 	map_info->c_color = get_color(line);
+		map_info->c_texture = ft_strdup(line);
 	}
 	else if(ft_strcmp(tmp_line, "F"))
 	{
-		(*map_info)->f_color = get_color(line);
-		(*map_info)->f_texture = ft_strdup(line);
+		map_info->f_color = get_color(line);
+		map_info->f_texture = ft_strdup(line);
 	}
 	free(tmp_line);
 }
 
-void read_textures(int fd, t_map_info **map_info)
+void read_textures(int fd, t_map_info *map_info)
 {
-	(void)map_info;
 	char *line;
 	int count_textures;
 

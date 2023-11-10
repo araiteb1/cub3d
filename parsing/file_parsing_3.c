@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_parsing_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:24:37 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/10/13 18:11:41 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/09 02:41:57 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,23 @@ int get_biggest_line(char **map)
 }
 
 
-void fill_map(t_map_info **map_info)
+void fill_map(t_map_info *map_info)
 {
 	int i;
 	int j;
 	int max;
 
 	i = 0;
-	max = get_biggest_line((*map_info)->map);
-	(*map_info)->num_cols = max;
-	while ((*map_info)->map[i])
+	max = get_biggest_line(map_info->map);
+	map_info->num_cols = max;
+	while (map_info->map[i])
 	{
-		if (check_all_spaces((*map_info)->map[i]))
+		if (check_all_spaces(map_info->map[i]))
 			writing_error("Map is not valid");
-		j = ft_strlen((*map_info)->map[i]);
+		j = ft_strlen(map_info->map[i]);
 		while (j < max)
 		{
-			(*map_info)->map[i] = ft_strjoin((*map_info)->map[i], " ");
+			map_info->map[i] = ft_strjoin(map_info->map[i], " ");
 			j++;
 		}
 		i++;
