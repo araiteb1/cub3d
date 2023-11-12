@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/12 04:14:48 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/12 14:38:52 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 
 #define MINIMAP_SCALE_FACTOR 2
 
-#define TEXWIDTH 60
-#define TEXHEIGHT 60
+#define TEXWIDTH 6
+#define TEXHEIGHT 6
 
 
 #define COLOR_RED 0xFF0000FF

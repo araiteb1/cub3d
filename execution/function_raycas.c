@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/12 03:51:19 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/12 14:05:15 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ void  add_algo(t_raycast *rc, t_map_info *mp)
 }
 
 void  draw_line(t_raycast *rc, t_map_info *mp)
-{ 
-  // if (ft_strcmp(mp->textur , mp->no_texture)==0 || ft_strcmp(mp->textur , mp->so_texture) == 0)
+{
   if (mp->textur == mp->no_texture || mp->textur == mp->so_texture)
 		rc->perp_walldist = rc->sidedistx - rc->deltadistx;
 	else
@@ -102,7 +101,6 @@ void  draw_line(t_raycast *rc, t_map_info *mp)
 	if (rc->end >=HEIGHT)
 		rc->end = HEIGHT - 1;
   if (mp->textur == mp->no_texture || mp->textur == mp->so_texture)
-  // if (ft_strcmp(mp->textur , mp->no_texture )== 0 || ft_strcmp(mp->textur , mp->so_texture) == 0)
 		rc->wallx = mp->info_player->y_pos + rc->perp_walldist * rc->raydiry;
 	else
 		rc->wallx = mp->info_player->x_pos + rc->perp_walldist * rc->raydirx;
