@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/10 02:28:26 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/12 04:14:48 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define HEIGHT 720
 # define TILE_SIZE 64
 
-# define MVSPEED			0.1
-# define ROTSPEED			0.1
+# define MVSPEED			0.5
+# define ROTSPEED			0.3
 
 #define MINIMAP_SCALE_FACTOR 2
 
-#define TEXWIDTH 64
-#define TEXHEIGHT 64
+#define TEXWIDTH 60
+#define TEXHEIGHT 60
 
 
 #define COLOR_RED 0xFF0000FF
@@ -44,19 +44,6 @@
 #define COLOR_BLACK 0x00000000
 #define COLOR_YELLOW 0x00FFFF00
 
-typedef struct s_ray
-{
-	double rayAngle;
-	double wallHitX;
-	double wallHitY;
-	double distance;
-	int wasHitVertical;
-	int isRayFacingUp;
-	int isRayFacingDown;
-	int isRayFacingLeft;
-	int isRayFacingRight;
-	int wallHitContent;
-}	t_ray;
 
 typedef struct s_player
 {
@@ -73,8 +60,6 @@ typedef struct s_player
 	double rotationSpeed;
 	double fieldOfView;
 	double num_rays;
-	// t_imag	*textur[4];
-	t_ray *rays;
 }	t_player;
 
 
@@ -96,7 +81,6 @@ typedef struct	s_map_info
 	int f_color;
 	char *fileName;
 	t_player		*info_player;
-	t_ray 			*rays;
 	mlx_t 			*mlx;
 	mlx_image_t		*img;
 	double		pos_tex;
@@ -207,20 +191,14 @@ int surround_map(char **map, int num_lines);
 int check_all_spaces(char *line);
 /**************************************************************/
 
-// raycasting
-// void castAllrays(t_map_info **s_map_info);
-// void castRay(double rayAngle, int stripId, t_map_info **map_info);
-// void rander_rays(t_map_info **map_info);
 //exec
 void raycast_data(t_map_info *mp);
 void  draw_line(t_raycast *rc, t_map_info *mp);
 void  add_algo(t_raycast *rc, t_map_info *mp);
 void  get_side_dist(t_map_info *mp, t_raycast *rc);
 void  get_coordinate(t_raycast *rc, int x, t_map_info *mp);
-void  init_data_ray(t_player *dt);
 void draw_line_pixel(t_raycast *rc, t_map_info *mp, int x);
-//hook
-// void  move(t_map_info *mp);
+
 void  rotation(t_map_info *mp);
 void     close_win(void *ptr);
 void key_definie(void *ptr);

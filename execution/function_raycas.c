@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/10 05:38:11 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/12 03:51:19 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void  add_algo(t_raycast *rc, t_map_info *mp)
     {
       rc->sidedistx += rc->deltadistx;
       rc->mapx += rc->stepx;
-      mp->textur = ft_strdup(mp->so_texture);
+      mp->textur = mp->so_texture;
       if(rc->raydirx > 0)
         mp->textur = mp->no_texture;
     }
@@ -88,18 +88,13 @@ void  add_algo(t_raycast *rc, t_map_info *mp)
 }
 
 void  draw_line(t_raycast *rc, t_map_info *mp)
-{
-  // printf("1===========>%f ||  %f\n",rc->sidedistx , rc->sidedisty );
-  // printf("1===========>%f ||  %f\n",rc->deltadistx , rc->deltadisty );
-  // printf("1===========>%s ||  %s || %s|| %s || %s\n",mp->textur , mp->no_texture, mp->so_texture, mp->ea_texture, mp->we_texture );
-  
+{ 
   // if (ft_strcmp(mp->textur , mp->no_texture)==0 || ft_strcmp(mp->textur , mp->so_texture) == 0)
   if (mp->textur == mp->no_texture || mp->textur == mp->so_texture)
 		rc->perp_walldist = rc->sidedistx - rc->deltadistx;
 	else
 		rc->perp_walldist = rc->sidedisty - rc->deltadisty;
   rc->line = (int)(HEIGHT / rc->perp_walldist);
-  // printf("%d ||  %f\n",rc->line, rc->perp_walldist);
 	rc->start = -rc->line / 2.0 + HEIGHT / 2.0;
 	if (rc->start < 0)
 		rc->start = 0;
@@ -112,8 +107,6 @@ void  draw_line(t_raycast *rc, t_map_info *mp)
 	else
 		rc->wallx = mp->info_player->x_pos + rc->perp_walldist * rc->raydirx;
   rc->wallx -= floor(rc->wallx);
-  // printf("[%f]\n", rc->wallx);
-  // exit(0);
 }
 
 void raycast_data(t_map_info *mp)
@@ -123,7 +116,7 @@ void raycast_data(t_map_info *mp)
   rc = (t_raycast *)malloc (sizeof(t_raycast));
     if(!rc)
       return ;
-  x = -1;
+  x = 0;
   mlx_delete_image(mp->mlx, mp->img);
 	mp->img = mlx_new_image(mp->mlx, WIDTH, HEIGHT);
   while(++x < WIDTH)
@@ -136,7 +129,5 @@ void raycast_data(t_map_info *mp)
   }
   mlx_image_to_window(mp->mlx , mp->img, 0, 0);
   free(rc);
-  // free_map(mp->map);
-  // free_map_info(mp);
 }
            

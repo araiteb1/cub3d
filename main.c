@@ -6,46 +6,12 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/10 05:34:21 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/12 03:55:00 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void printInfoRays(t_map_info *map_info)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < map_info->info_player->num_rays)
-// 	{
-// 		//printf("rayAngle: %f, wallHitX: %f, wallHitY: %f, distance: %f, wasHitVertical: %d, isRayFacingUp: %d, isRayFacingDown: %d, isRayFacingLeft: %d, isRayFacingRight: %d, wallHitContent: %d\n", map_info->info_player->rays[i].rayAngle, map_info->info_player->rays[i].wallHitX, map_info->info_player->rays[i].wallHitY, map_info->info_player->rays[i].distance, map_info->info_player->rays[i].wasHitVertical, map_info->info_player->rays[i].isRayFacingUp, map_info->info_player->rays[i].isRayFacingDown, map_info->info_player->rays[i].isRayFacingLeft, map_info->info_player->rays[i].isRayFacingRight, map_info->info_player->rays[i].wallHitContent);
-// 		i++;
-// 	}
-// }
-
-// void init_rays(t_map_info **map_info)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	(*map_info)->info_player->rays = malloc(sizeof(t_ray) * (*map_info)->info_player->num_rays);
-// 	while (i < (*map_info)->info_player->num_rays)
-// 	{
-// 		(*map_info)->info_player->rays[i].rayAngle = (*map_info)->info_player->rotationAngle - ((*map_info)->info_player->fieldOfView / 2) + ((*map_info)->info_player->fieldOfView / (*map_info)->info_player->num_rays) * i;
-// 		(*map_info)->info_player->rays[i].wallHitX = 0;
-// 		(*map_info)->info_player->rays[i].wallHitY = 0;
-// 		(*map_info)->info_player->rays[i].distance = 0;
-// 		(*map_info)->info_player->rays[i].wasHitVertical = 0;
-// 		(*map_info)->info_player->rays[i].isRayFacingUp = 0;
-// 		(*map_info)->info_player->rays[i].isRayFacingDown = 0;
-// 		(*map_info)->info_player->rays[i].isRayFacingLeft = 0;
-// 		(*map_info)->info_player->rays[i].isRayFacingRight = 0;
-// 		(*map_info)->info_player->rays[i].wallHitContent = 0;
-// 		i++;
-// 	}
-	
-// }
 int	word_count(char const *str, char sep)
 {
 	int	wcount;
@@ -211,7 +177,7 @@ int main(int ac, char **av)
 		init_mlx(map_info);               
 		map_info->info_player = init_player(map_info);
 		init_int_map(map_info);
-		raycast_data(map_info);
+		// raycast_data(map_info);
 		mlx_loop_hook(map_info->mlx, key_definie, map_info);
 		mlx_loop(map_info->mlx);
 		/*************************************************/

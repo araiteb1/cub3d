@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:21 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/10 06:15:14 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/12 03:51:27 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ void check_if_wall(t_map_info *mp, double dx, double dy)
         return ;
     mp->info_player->x_pos +=dx;
     mp->info_player->y_pos +=dy;
-    // printf("%f ||  %f \n", mp->info_player->x_pos, mp->info_player->y_pos);
-    // exit(0);
-    
 }
 
 void  move_up(t_map_info *mp)
@@ -29,11 +26,9 @@ void  move_up(t_map_info *mp)
     double dy;
     double mvspeed;
 
-    dx = 0.0;
-    dy = 0.0;
     mvspeed = MVSPEED * (1.0);
-    dx += mp->info_player->dirx *mvspeed;
-    dy += mp->info_player->diry *mvspeed;
+    dx = mp->info_player->dirx *mvspeed;
+    dy = mp->info_player->diry *mvspeed;
     check_if_wall(mp, dx, dy);
 }
 void  move_down(t_map_info *mp)
@@ -42,11 +37,9 @@ void  move_down(t_map_info *mp)
     double dy;
     double mvspeed;
 
-    dx = 0.0;
-    dy = 0.0;
     mvspeed = MVSPEED * (-1.0);
-    dx += mp->info_player->dirx *mvspeed;
-    dy += mp->info_player->diry *mvspeed;
+    dx = mp->info_player->dirx *mvspeed;
+    dy = mp->info_player->diry *mvspeed;
     check_if_wall(mp, dx, dy);
 }
 void  move_left1(t_map_info *mp)
@@ -54,12 +47,10 @@ void  move_left1(t_map_info *mp)
     double dx;
     double dy;
     double mvspeed;
-    dx = 0.0;
-    dy = 0.0;
-    mvspeed = 0.0;
+
     mvspeed = MVSPEED * (1.0);
-    dx += mp->info_player->planex * mvspeed;
-    dy += mp->info_player->planey * mvspeed;
+    dx = mp->info_player->planex * mvspeed;
+    dy = mp->info_player->planey * mvspeed;
     check_if_wall(mp, dx, dy);
 }
 void  move_right1(t_map_info *mp)
@@ -67,11 +58,10 @@ void  move_right1(t_map_info *mp)
     double dx;
     double dy;
     double mvspeed;
-    dx = 0.0;
-    dy = 0.0;
+
     mvspeed = MVSPEED * (-1.0);
-    dx += mp->info_player->planex * mvspeed;
-    dy += mp->info_player->planey * mvspeed;
+    dx = mp->info_player->planex * mvspeed;
+    dy = mp->info_player->planey * mvspeed;
     check_if_wall(mp, dx, dy);
 }
 
@@ -137,6 +127,4 @@ void key_definie(void *ptr)
     if (mlx_is_key_down(mp->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mp->mlx, MLX_KEY_LEFT))
         rotation(mp);
     raycast_data(mp);
-    // free_map(mp->map);
-    // free_map_info(mp);
 }

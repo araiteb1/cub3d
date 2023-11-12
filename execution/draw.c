@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:10 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/10 04:51:16 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/12 00:51:56 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    init_data_tex(t_raycast *rc, t_map_info *mp)
     mp->texture = mlx_new_image(mp->mlx, TEXWIDTH,TEXHEIGHT);
     mp->x_tex = (int)(rc->wallx * TEXHEIGHT);
     if((mp->textur == mp->no_texture || mp->textur == mp->so_texture)  && rc->raydirx > 0 )
-        mp->x_tex = mp->texture->width - mp->x_tex - 1;
+        mp->x_tex = TEXWIDTH - mp->x_tex - 1;
     if((mp->textur == mp->we_texture || mp->textur == mp->ea_texture)  && rc->raydiry > 0 )
         mp->x_tex = TEXWIDTH - mp->x_tex - 1;
     mp->step_tex = (double)TEXHEIGHT / rc->line ;
@@ -28,14 +28,10 @@ int color_for_tex(t_map_info *mp)
 {
     char *tmp;
     int cln;
-    //15986410
-    // int color = 15986410;
+
 
     cln = mp->y_tex * mp->texture->count + mp->x_tex * 4;
     tmp = mp->textur + cln;
-    // if(mp->texture->enabled == 0)
-    //     color = ((unsigned char)tmp[2] << 16) + ((unsigned char)tmp[1] << 8) + ((unsigned char)tmp[0]);
-    // color = ((unsigned char)tmp[0] << 16) + ((unsigned char)tmp[1] << 8) + ((unsigned char)tmp[2]);
     return (cln);
      
 }
@@ -44,9 +40,6 @@ void draw_line_pixel(t_raycast *rc, t_map_info *mp, int x)
     int y;
 
     y = 0;
-    // printf("%d\n", rc->start);
-	// printf("%d\n", rc->end);
-    // exit(0);
     while(y < rc->start)
         mlx_put_pixel(mp->img, x, y++, 115692);
     init_data_tex(rc, mp);
