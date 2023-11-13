@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/12 14:38:52 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/13 13:22:29 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define HEIGHT 720
 # define TILE_SIZE 64
 
-# define MVSPEED			0.5
-# define ROTSPEED			0.3
+# define MVSPEED			0.2
+# define ROTSPEED			0.1
 
 #define MINIMAP_SCALE_FACTOR 2
 

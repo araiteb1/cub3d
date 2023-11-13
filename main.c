@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/12 03:55:00 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/13 13:38:21 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,6 @@ int main(int ac, char **av)
 		init_mlx(map_info);               
 		map_info->info_player = init_player(map_info);
 		init_int_map(map_info);
-		// raycast_data(map_info);
 		mlx_loop_hook(map_info->mlx, key_definie, map_info);
 		mlx_loop(map_info->mlx);
 		/*************************************************/

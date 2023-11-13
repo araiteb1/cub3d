@@ -1,9 +1,9 @@
 C 10,10,10
-NO                    /Users/ahmaymou/Desktop/cub3d/textures/space0_1.xpm
-WE /Users/ahmaymou/Desktop/cub3d/textures/orange.xpm
+NO ./textures/redbrick.xpm
+SO ./textures/bluestone.xpm
+WE ./textures/greystone.xpm
+EA ./textures/wood.xpm
 F 50,50,54
-SO /Users/ahmaymou/Desktop/cub3d/textures/octopus.xpm
-EA        /Users/ahmaymou/Desktop/cub3d/textures/lwodo7.xpm
 
 
 
