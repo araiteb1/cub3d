@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/12 14:05:15 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 12:49:32 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,17 +115,18 @@ void raycast_data(t_map_info *mp)
     if(!rc)
       return ;
   x = 0;
-  mlx_delete_image(mp->mlx, mp->img);
-	mp->img = mlx_new_image(mp->mlx, WIDTH, HEIGHT);
-  while(++x < WIDTH)
+  mlx_destroy_image(mp->mlx, mp->img->img);
+	mp->img->img = mlx_new_image(mp->mlx, WIDTH, HEIGHT);
+  while(x < WIDTH)
   {
     get_coordinate(rc, x, mp);
     get_side_dist(mp, rc);
     add_algo(rc, mp);
     draw_line(rc, mp);
     draw_line_pixel(rc, mp, x);
+    x++;
   }
-  mlx_image_to_window(mp->mlx , mp->img, 0, 0);
+  mlx_put_image_to_window(mp->mlx , mp->win ,mp->img, 0, 0);
   free(rc);
 }
            

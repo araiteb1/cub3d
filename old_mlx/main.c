@@ -6,13 +6,13 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/13 13:38:21 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:18:10 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	word_count(char const *str, char sep)
+int	len_line(char const *str, char sep)
 {
 	int	wcount;
 	int	flag;
@@ -40,21 +40,7 @@ void	cln_exit(t_map_info *data, int status)
 	(void) status;
 	exit(0);
 }
-void	*sf_calloc(t_map_info *data, size_t size)
-{
-	void	*ptr;
-	char	*str;
-	size_t	i;
 
-	ptr = malloc(size);
-	if (!ptr)
-		cln_exit(data, EXIT_FAILURE);
-	str = (char *)ptr;
-	i = 0;
-	while (i < size)
-		str[i++] = (char)0;
-	return (ptr);
-}
 size_t	word_len(char const *str, char sep)
 {
 	size_t	len;
@@ -64,7 +50,7 @@ size_t	word_len(char const *str, char sep)
 		len++;
 	return (len);
 }
-size_t	max_word_len(const char *str, char sep)
+size_t	max_len_line(const char *str, char sep)
 {
 	int	str_len;
 	int	max_len;
@@ -122,14 +108,14 @@ void	init_int_map(t_map_info *mp)
 	char *lines;
 
 	lines = join_raw_map(mp);
-	mp->map1_height = word_count(lines, '\n');
-	mp->map1 = (int **)sf_calloc(mp, sizeof(int *) * mp->map1_height);
-	mp->map1_width = max_word_len(lines, '\n');
+	mp->map1_height = len_line(lines, '\n');
+	mp->map1 = (int **)malloc(sizeof(int *) * mp->map1_height);
+	mp->map1_width = max_len_line(lines, '\n');
 	k = 0;
 	i = -1;
 	while (++i < mp->map1_height)
 	{
-		mp->map1[i] = (int *)sf_calloc(mp, sizeof(int) * mp->map1_width);
+		mp->map1[i] = (int *)malloc(sizeof(int) * mp->map1_width);
 		j = 0;
 		while (lines[k] && lines[k] != '\n')
 		{
@@ -142,7 +128,7 @@ void	init_int_map(t_map_info *mp)
 			else if (lines[k] == '0' || lines[k] == '1')
 				mp->map1[i][j++] = lines[k++] - '0';
 			else
-				data_init_camera(mp,  i, j++, lines[k++]);
+				init_data_dir(mp, lines[k++]);
 		}
 		while (j < mp->map1_width)
 			mp->map1[i][j++] = 1;
@@ -177,7 +163,9 @@ int main(int ac, char **av)
 		init_mlx(map_info);               
 		map_info->info_player = init_player(map_info);
 		init_int_map(map_info);
-		mlx_loop_hook(map_info->mlx, key_definie, map_info);
+		raycast_data(map_info);
+		mlx_hook(map_info->win,2,0, key_definie, map_info);
+		mlx_hook(map_info->win,17 , 0, close_win, map_info);
 		mlx_loop(map_info->mlx);
 		/*************************************************/
 		// close(fd);

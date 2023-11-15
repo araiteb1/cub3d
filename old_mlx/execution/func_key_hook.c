@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:21 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/12 03:51:27 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:09:09 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void  move_right1(t_map_info *mp)
 }
 
 
-void  rotation(t_map_info *mp)
+void  rotation(t_map_info *mp, int key)
 {
     double rotspeed;
     double dir_new_x;
 
     rotspeed = ROTSPEED;
-    if (mlx_is_key_down(mp->mlx, MLX_KEY_RIGHT))
+    if (key == KEY_RIGHT)
         rotspeed = -ROTSPEED;
     dir_new_x = mp->info_player->dirx;
     mp->info_player->dirx = dir_new_x * cos(rotspeed) - mp->info_player->diry * sin(rotspeed);
@@ -94,37 +94,27 @@ void	ft_free(char **str)
 	free(str);
 	str = NULL;
 }
-void     close_win(void *ptr)
+int     close_win(t_map_info *mp)
 {
-    t_map_info *mp;
-
-	mp = (t_map_info *)ptr;
-    mlx_delete_image(mp->mlx, mp->img);
-	mp->img = mlx_new_image(mp->mlx, WIDTH, HEIGHT);
+    mlx_destroy_window(mp->mlx, mp->win);
     exit(0);
+    return (0);
 }
-int ternary(bool cond)
-{
-    if (cond )
-        return 1;
-    return -1;   
-}
-void key_definie(void *ptr)
-{
-    t_map_info *mp;
 
-	mp = (t_map_info *)ptr;
-   if (mlx_is_key_down(mp->mlx, MLX_KEY_ESCAPE))
+int key_definie(int key, t_map_info *mp)
+{
+   if (key == KEY_ESC)
         close_win(mp);
-    if (mlx_is_key_down(mp->mlx, MLX_KEY_W))
+    if (key == KEY_W)
         move_up(mp);
-   if (mlx_is_key_down(mp->mlx, MLX_KEY_S))
+   if (key == KEY_S)
        move_down(mp);
-    if (mlx_is_key_down(mp->mlx, MLX_KEY_D))
+    if (key == KEY_D)
         move_left1(mp);
-    if (mlx_is_key_down(mp->mlx, MLX_KEY_A))
+    if (key == KEY_A)
        move_right1(mp);
-    if (mlx_is_key_down(mp->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mp->mlx, MLX_KEY_LEFT))
-        rotation(mp);
+    if ( key == KEY_LEFT || key == KEY_RIGHT)
+        rotation(mp, key);
     raycast_data(mp);
+    return (0);
 }
