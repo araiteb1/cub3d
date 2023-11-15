@@ -2,7 +2,7 @@ NO ./textures/redbrick.xpm
 SO ./textures/bluestone.xpm
 WE ./textures/greystone.xpm
 EA ./textures/wood.xpm
-F 56, 39, 46
+F 125, 39, 46
 C 44, 44, 45
 
 111111111111111

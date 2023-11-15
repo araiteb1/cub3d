@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:04:25 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/11 23:22:22 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 14:18:10 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,8 @@ void get_player_position(t_map_info *map_info, t_player *player)
     }
 }
 
-void	data_init_camera(t_map_info *mp, int  x, int y, char dir)
+void	init_data_dir(t_map_info *mp, char dir)
 {
-    // if (mp->info_player->x_pos >= 0 || mp->info_player->y_pos >= 0)
-    //     exit (0);
-    (void)x;
-    (void)y;
-    // mp->info_player->x_pos = x;
-    // mp->info_player->y_pos = y; 
 	if (mp->info_player->rotationAngle == 0 || mp->info_player->rotationAngle == M_PI)
 	{
 		mp->info_player->dirx = 0;
@@ -58,17 +52,6 @@ void	data_init_camera(t_map_info *mp, int  x, int y, char dir)
 		mp->info_player->planey = -0.66 * (-(dir == 'S') || 1.0);
 	}
 }
-
-// double playerAngle(t_map_info *map_info, int x, int y)
-// {
-// 	if ((map_info)->map[y][x] == 'W')
-// 		return (M_PI);
-// 	else if ( map_info->map[y][x] == 'N')
-// 		return (3 * M_PI / 2);
-// 	else if  ((map_info)->map[y][x] == 'S')
-// 		return (M_PI / 2);
-// 	return (0);
-// }
 
 double playerAngle(t_map_info *mp)
 {
@@ -97,15 +80,9 @@ t_player *init_player(t_map_info *mInfo)
     if (!map_info)
         writing_error("Failed to allocate memory");
     get_player_position(mInfo, map_info);
-    map_info->x = (map_info->x_pos * TILE_SIZE ) +(TILE_SIZE / 2);
-    map_info->y = (map_info->y_pos * TILE_SIZE ) +(TILE_SIZE / 2);
-    
-    // map_info->rotationAngle = playerAngle(mInfo, map_info->x_pos, map_info->y_pos);
     map_info->rotationAngle = playerAngle(mInfo);
     map_info->moveSpeed = 3;
     map_info->rotationSpeed = 2 * (M_PI / 180);
-    map_info->fieldOfView = 60 * (M_PI / 180);
-    map_info->num_rays = WIDTH / 2;
     return map_info;
 }
 

@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:18:30 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/09 02:43:06 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 09:04:11 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ t_map_info *init_map(char *fileName)
 
 void init_mlx(t_map_info *map_info)
 {
-	map_info->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	// map_info->win = mlx_new_window(map_info->mlx, WIDTH, HEIGHT, "win");
-	map_info->img = mlx_new_image(map_info->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(map_info->mlx, map_info->img, 0, 0);
+	map_info->mlx = mlx_init();
+	map_info->win = mlx_new_window(map_info->mlx, WIDTH, HEIGHT, "win");
+	map_info->img = (t_img *)malloc(sizeof(t_img));
+	map_info->img->img = mlx_new_image(map_info->mlx, WIDTH, HEIGHT);
+	map_info->img->addr = mlx_get_data_addr(map_info->img->img, &map_info->img->bpp,
+				&map_info->img->line_length, &map_info->img->end);
 }
 
 
