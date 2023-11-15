@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/15 14:18:10 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 18:34:46 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,89 @@ void	init_int_map(t_map_info *mp)
 	free(lines);
 	
 }
+
+
+void print_textures(t_map_info *map_info)
+{
+	int i = 0;
+	printf("NO: %s\n", map_info->no_texture);
+	printf("SO: %s\n", map_info->so_texture);
+	printf("WE: %s\n", map_info->we_texture);
+	printf("EA: %s\n", map_info->ea_texture);
+	printf("C: %s\n", map_info->c_texture);
+	printf("F: %s\n", map_info->f_texture);
+	printf("C: %d\n", map_info->c_color);
+	printf("F: %d\n", map_info->f_color);
+	while (i < 4)
+	{
+		printf("paths[%d]: |%s|\n", i, map_info->paths[i]);
+		i++;
+	}
+}
+
+
+int check_paths(t_map_info *map_info)
+{
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (open(map_info->paths[i], O_RDONLY) == -1)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+
+char *get_path(char *line)
+{
+	int i;
+	int len;
+	char *path;
+
+	i = 0;
+	len = ft_strlen(line);
+	while (line[i] != ' ' && line[i])
+		i++;
+	while (line[i] == ' ' && line[i])
+		i++;
+	while (line[len] == ' ' && line[len])
+		len--;
+	path = ft_strtrim(line + i, " ");
+	return (path);
+}
+
+void init_path(t_map_info *map_info)
+{
+	map_info->paths = malloc(sizeof(char *) * 5);
+	map_info->paths[0] = get_path(map_info->no_texture);
+	map_info->paths[1] = get_path(map_info->so_texture);
+	map_info->paths[2] = get_path(map_info->we_texture);
+	map_info->paths[3] = get_path(map_info->ea_texture);
+	map_info->paths[4] = NULL;
+	if (!check_paths(map_info))
+			writing_error("Wrong path to texture");
+}
+
+void free_paths(t_map_info *map_info)
+{
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free(map_info->paths[i]);
+		i++;
+	}
+	free(map_info->paths);
+}
+
+void ff()
+{
+	system("leaks cub3D");
+}
 int main(int ac, char **av)
 {
 	int fd;
@@ -158,19 +241,24 @@ int main(int ac, char **av)
 		read_map(fd, map_info);
 		fill_map(map_info);
 		parsing(map_info);
+		init_path(map_info);
+		// print_textures(map_info);
+		
 		// printMap(map_info);
 		/*************************************************/
-		init_mlx(map_info);               
+		// init_mlx(map_info);               
 		map_info->info_player = init_player(map_info);
-		init_int_map(map_info);
-		raycast_data(map_info);
-		mlx_hook(map_info->win,2,0, key_definie, map_info);
-		mlx_hook(map_info->win,17 , 0, close_win, map_info);
-		mlx_loop(map_info->mlx);
+		// init_int_map(map_info);
+		// raycast_data(map_info);
+		// mlx_hook(map_info->win,2,0, key_definie, map_info);
+		// mlx_hook(map_info->win,17 , 0, close_win, map_info);
+		// mlx_loop(map_info->mlx);
+		// atexit(ff);
 		/*************************************************/
-		// close(fd);
-		// free_map(map_info->map); 
-		// free_map_info(map_info);
+		close(fd);
+		free_map(map_info->map); 
+		free_map_info(map_info);
+		free_paths(map_info);
 		/**************************************************/
 	}
 	else

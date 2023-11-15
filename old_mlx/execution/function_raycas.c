@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function_raycas.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/15 12:49:32 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 15:19:20 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 
 void  get_coordinate(t_raycast *rc, int x, t_map_info *mp)
 {
-  rc->camerax = 2.0 * x  / WIDTH - 1.0;
-  rc->raydirx = mp->info_player->dirx + mp->info_player->planex * rc->camerax;
-  rc->raydiry = mp->info_player->diry + mp->info_player->planey * rc->camerax;
-  rc->mapx = (int)mp->info_player->x_pos;
-  rc->mapy = (int)mp->info_player->y_pos;
-  rc->sidedistx = 0.0;
-  rc->sidedisty = 0.0;
-  rc->deltadistx = fabs(1/rc->raydirx);
-  if(rc->raydirx == 0)
-    rc->deltadistx = 1e30;
-  rc->deltadisty = fabs(1/rc->raydiry);
-  if(rc->raydiry == 0)
-    rc->deltadisty = 1e30;
-  rc->perp_walldist = 0.0;
-  rc->stepx = 0;
-  rc->stepy = 0;
-  mp->textur = NULL;
+    rc->camerax = 2.0 * x  / WIDTH - 1.0;
+    rc->raydirx = mp->info_player->dirx + mp->info_player->planex * rc->camerax;
+    rc->raydiry = mp->info_player->diry + mp->info_player->planey * rc->camerax;
+    rc->mapx = (int)mp->info_player->x_pos;
+    rc->mapy = (int)mp->info_player->y_pos;
+    rc->sidedistx = 0.0;
+    rc->sidedisty = 0.0;
+    rc->deltadistx = fabs(1/rc->raydirx);
+    if(rc->raydirx == 0)
+      rc->deltadistx = 1e30;
+    rc->deltadisty = fabs(1/rc->raydiry);
+    if(rc->raydiry == 0)
+      rc->deltadisty = 1e30;
+    rc->perp_walldist = 0.0;
+    rc->stepx = 0;
+    rc->stepy = 0;
+    mp->textur = NULL;
 
 }
 

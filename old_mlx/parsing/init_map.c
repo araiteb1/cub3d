@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:18:30 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/15 09:04:11 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/15 17:43:47 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_map_info *init_map(char *fileName)
 	map_info->num_lines = 0;
 	map_info->num_cols = 0;
 	map_info->fileName = fileName;
+	map_info->paths = NULL;
 	return map_info;
 }
 
