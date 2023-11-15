@@ -6,7 +6,7 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/15 17:42:59 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/15 19:08:09 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,13 @@ void fill_map(t_map_info *map_info);
 int get_biggest_line(char **map);
 int surround_map(char **map, int num_lines);
 int check_all_spaces(char *line);
+
+//file_parsing_4.c
+int check_paths(t_map_info *map_info);
+char *get_path(char *line);
+void init_path(t_map_info *map_info);
+void free_paths(t_map_info *map_info);
+
 /**************************************************************/
 
 //exec
