@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/15 19:08:09 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/16 16:43:54 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define HEIGHT 720
 # define TILE_SIZE 64
 
-# define MVSPEED			1.2
-# define ROTSPEED			0.5
+# define MVSPEED			0.5
+# define ROTSPEED			0.3
 
 #define MINIMAP_SCALE_FACTOR 2
 
@@ -69,15 +69,15 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	double x_pos;
-	double y_pos;
-	double         dirx;
-    double         diry;
-    double         planex;
-    double         planey;
-	double rotationAngle;
-	double moveSpeed;
-	double rotationSpeed;
+	double 			x_pos;
+	double 			y_pos;
+	double			dirx;
+    double			diry;
+    double			planex;
+    double			planey;
+	double 			rotationAngle;
+	double 			moveSpeed;
+	double			rotationSpeed;
 }	t_player;
 
 
@@ -107,6 +107,7 @@ typedef struct	s_map_info
 	int			x_tex;
 	int			y_tex;
 	char		*textur;
+	char		*textur1;
 	t_img	*texture;
 	char		**paths;
 }	t_map_info;

@@ -1,5 +1,5 @@
-NO ./textures/redbrick.xpm
-SO ./textures/bluestone.xpm
+NOp ./textures/redbrick.xpm
+SOkkk ./textures/bluestone.xpm
 WE ./textures/greystone.xpm
 EA ./textures/wood.xpm
 F 30,39,44

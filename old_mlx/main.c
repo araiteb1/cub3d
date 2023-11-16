@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/15 19:07:15 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/16 16:46:15 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@ int	len_line(char const *str, char sep)
 	}
 	return (wcount);
 }
-void	cln_exit(t_map_info *data, int status)
-{
-	(void) data;
-	(void) status;
-	exit(0);
-}
 
 size_t	word_len(char const *str, char sep)
 {
@@ -50,6 +44,7 @@ size_t	word_len(char const *str, char sep)
 		len++;
 	return (len);
 }
+
 size_t	max_len_line(const char *str, char sep)
 {
 	int	str_len;
@@ -84,22 +79,7 @@ char 	*join_raw_map(t_map_info *mp)
 	}
 	return (lines);
 }
-void 	print_map_int(t_map_info *mp)
-{
-	int i;
-	int j;
 
-	i = 0;
-	while(i < mp->map1_height)
-	{
-		j = 0;
-		while(j < mp->map1_width)
-			printf("%d", mp->map1[i][j++]);
-		i++;
-		printf("\n");
-	}
-	// exit(0);
-}
 void	init_int_map(t_map_info *mp)
 {
 	int	i;
@@ -157,13 +137,6 @@ void print_textures(t_map_info *map_info)
 	}
 }
 
-
-
-
-void ff()
-{
-	system("leaks cub3D");
-}
 int main(int ac, char **av)
 {
 	int fd;
@@ -186,23 +159,23 @@ int main(int ac, char **av)
 		fill_map(map_info);
 		parsing(map_info);
 		init_path(map_info);
-		print_textures(map_info);
+		// print_textures(map_info);
 		
 		// printMap(map_info);
 		/*************************************************/
-		// init_mlx(map_info);               
+		init_mlx(map_info);               
 		map_info->info_player = init_player(map_info);
-		// init_int_map(map_info);
-		// raycast_data(map_info);
-		// mlx_hook(map_info->win,2,0, key_definie, map_info);
-		// mlx_hook(map_info->win,17 , 0, close_win, map_info);
-		// mlx_loop(map_info->mlx);
+		init_int_map(map_info);
+		raycast_data(map_info);
+		mlx_hook(map_info->win, 2, 0, key_definie, map_info);
+		mlx_hook(map_info->win, 17 , 0, close_win, map_info);
+		mlx_loop(map_info->mlx);
 		// atexit(ff);
 		/*************************************************/
-		// close(fd);
-		// free_map(map_info->map); 
-		// free_map_info(map_info);
-		// free_paths(map_info);
+		close(fd);
+		free_map(map_info->map); 
+		free_map_info(map_info);
+		free_paths(map_info);
 		/**************************************************/
 	}
 	else

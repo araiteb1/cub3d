@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_parsing_4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:06:42 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/15 19:06:56 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/16 16:29:41 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int check_paths(t_map_info *map_info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -30,17 +30,11 @@ int check_paths(t_map_info *map_info)
 char *get_path(char *line)
 {
 	int i;
-	int len;
 	char *path;
 
 	i = 0;
-	len = ft_strlen(line);
 	while (line[i] != ' ' && line[i])
 		i++;
-	while (line[i] == ' ' && line[i])
-		i++;
-	while (line[len] == ' ' && line[len])
-		len--;
 	path = ft_strtrim(line + i, " ");
 	return (path);
 }
