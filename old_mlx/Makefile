@@ -6,7 +6,7 @@
 #    By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/15 19:09:04 by ahaloui          ###   ########.fr        #
+#    Updated: 2023/11/16 17:59:40 by ahaloui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 INCLUDES=.
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 # LIBMLX = $(HOME)/MLX42
 # LIBS   = libmlx42/libmlx42.a -ldl -lglfw -pthread -lm
 

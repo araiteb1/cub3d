@@ -6,15 +6,15 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:29:15 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/10/11 12:30:14 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/16 19:17:24 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] && s2 [i])
@@ -31,24 +31,27 @@ int ft_strcmp(char *s1, char *s2)
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
-} 
-int only_digit(char *color)
+}
+
+int	only_digit(char *color)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (color[i])
 	{
 		if (!ft_isdigit(color[i]) 
 			&& color[i] != ' '
-				&& color[i] != '+')
+			&& color[i] != '+')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int ft_size_of_array(char **array)
+int	ft_size_of_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])
@@ -56,10 +59,10 @@ int ft_size_of_array(char **array)
 	return (i);
 }
 
-int count_number_of_commas(char *line)
+int	count_number_of_commas(char *line)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;

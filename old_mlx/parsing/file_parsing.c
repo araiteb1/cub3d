@@ -6,21 +6,20 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:30:22 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/15 17:41:26 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/16 19:15:56 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-
-int free_colors(char **colors)
+int	free_colors(char **colors)
 {
-	int color;
-	int i;
+	int	color;
+	int	i;
 
 	i = 0;
 	color = create_trgb(0, ft_atoi(colors[0]),
-		ft_atoi(colors[1]), ft_atoi(colors[2]));
+			ft_atoi(colors[1]), ft_atoi(colors[2]));
 	while (colors[i])
 	{
 		free(colors[i]);
@@ -30,10 +29,10 @@ int free_colors(char **colors)
 	return (color);
 }
 
-int get_color(char *line)
+int	get_color(char *line)
 {
-	char **colors;
-	int i;
+	char	**colors;
+	int		i;
 
 	if (count_number_of_commas(line) != 2)
 		writing_error("Colors");
@@ -46,19 +45,18 @@ int get_color(char *line)
 	{
 		if (ft_atoi(colors[i]) < 0 
 			|| ft_atoi(colors[i]) > 255 
-				|| !only_digit(colors[i])
-					|| ft_size_of_array(colors) != 3)
-						writing_error("Colors");
+			|| !only_digit(colors[i]) 
+			|| ft_size_of_array(colors) != 3)
+			writing_error("Colors");
 		i++;
 	}
 	return (free_colors(colors));
 }
 
-
-int valide_texture(char *line)
+int	valide_texture(char *line)
 {
-	int i;
-	char *tmp_line;
+	int		i;
+	char	*tmp_line;
 
 	i = 0;
 	while (line[i] == ' ' && line[i])
@@ -67,57 +65,73 @@ int valide_texture(char *line)
 		i++;
 	tmp_line = ft_substr(line, 0, i);
 	if (ft_strcmp(tmp_line, "NO"))
-		return (free(tmp_line),1);
+		return (free(tmp_line), 1);
 	else if (ft_strcmp(tmp_line, "SO"))
-		return (free(tmp_line),1);
+		return (free(tmp_line), 1);
 	else if (ft_strcmp(tmp_line, "WE"))
-		return (free(tmp_line),1);
+		return (free(tmp_line), 1);
 	else if (ft_strcmp(tmp_line, "EA"))
-		return (free(tmp_line),1);
+		return (free(tmp_line), 1);
 	else if (ft_strcmp(tmp_line, "F"))
-		return (free(tmp_line),1);
+		return (free(tmp_line), 1);
 	else if (ft_strcmp(tmp_line, "C"))
-		return (free(tmp_line),1);
-	return (free(tmp_line),0);
+		return (free(tmp_line), 1);
+	return (free(tmp_line), 0);
 }
 
-void fill_textures(t_map_info *map_info, char *line)
+void	help_fill_textures(t_map_info *map_info, char *line, char *tmp_line)
 {
-	int i;
-	char *tmp_line;
+	if (ft_strcmp(tmp_line, "NO"))
+		map_info->no_texture = ft_strdup(line);
+	else if (ft_strcmp(tmp_line, "SO"))
+		map_info->so_texture = ft_strdup(line);
+	else if (ft_strcmp(tmp_line, "WE"))
+		map_info->we_texture = ft_strdup(line);
+	else if (ft_strcmp(tmp_line, "EA"))
+		map_info->ea_texture = ft_strdup(line);
+	else if (ft_strcmp(tmp_line, "C"))
+	{
+		map_info->c_color = get_color(line);
+		map_info->c_texture = ft_strdup(line);
+	}
+	else if (ft_strcmp(tmp_line, "F"))
+	{
+		map_info->f_color = get_color(line);
+		map_info->f_texture = ft_strdup(line);
+	}
+}
+
+void	fill_textures(t_map_info *map_info, char *line)
+{
+	int		i;
+	char	*tmp_line;
 
 	i = 0;
 	while (line[i] != ' ' && line[i])
 		i++;
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
-	
 	tmp_line = ft_substr(line, 0, i);
-	if(ft_strcmp(tmp_line, "NO"))
-		map_info->no_texture = ft_strdup(line);
-	else if(ft_strcmp(tmp_line, "SO"))
-	 	map_info->so_texture = ft_strdup(line);
-	else if(ft_strcmp(tmp_line, "WE"))
-	 	map_info->we_texture = ft_strdup(line);
-	else if(ft_strcmp(tmp_line, "EA"))
-	 	map_info->ea_texture = ft_strdup(line);
-	else if(ft_strcmp(tmp_line, "C"))
-	{
-	 	map_info->c_color = get_color(line);
-		map_info->c_texture = ft_strdup(line);
-	}
-	else if(ft_strcmp(tmp_line, "F"))
-	{
-		map_info->f_color = get_color(line);
-		map_info->f_texture = ft_strdup(line);
-	}
+	help_fill_textures(map_info, line, tmp_line);
 	free(tmp_line);
 }
 
-void read_textures(int fd, t_map_info *map_info)
+void	help_read_textures(t_map_info *map_info, char *line, int *count_textures)
 {
-	char *line;
-	int count_textures;
+	if (valide_texture(line))
+	{
+		fill_textures(map_info, line);
+		free(line);
+		(*count_textures)++;
+	}
+	else
+		writing_error("Textures Missign");
+}
+
+void	read_textures(int fd, t_map_info *map_info)
+{
+	char	*line;
+	int		count_textures;
 
 	line = get_next_line(fd);
 	count_textures = 0;
@@ -130,20 +144,13 @@ void read_textures(int fd, t_map_info *map_info)
 		}
 		else
 		{
-			if (valide_texture(line))
-			{
-				fill_textures(map_info, line);
-				free(line);
-				count_textures++;
-			}
-			else
-				writing_error("Textures Missign");
+			help_read_textures(map_info, line, &count_textures);
 			line = get_next_line(fd);
 			if (count_textures == 6)
-				break;
+				break ;
 		}
 	}
 	if (!check_textures(map_info))
-        writing_error("Missing textures");
+		writing_error("Missing textures");
 	free(line);
 }
