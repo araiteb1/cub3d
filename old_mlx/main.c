@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/16 16:46:15 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:12:24 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,29 @@ void print_textures(t_map_info *map_info)
 	}
 }
 
+void	ft_free_matrix(int **str, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+void  f()
+{
+	system("leaks cub3D");
+}
 int main(int ac, char **av)
 {
 	int fd;
 	t_map_info *map_info;
 
+	atexit(f);
 	if (ac == 2)
 	{
 		if(!check_extension_of_file(av[1]))
@@ -167,11 +185,11 @@ int main(int ac, char **av)
 		map_info->info_player = init_player(map_info);
 		init_int_map(map_info);
 		raycast_data(map_info);
-		mlx_hook(map_info->win, 2, 0, key_definie, map_info);
+		mlx_key_hook(map_info->win, key_definie, map_info);
 		mlx_hook(map_info->win, 17 , 0, close_win, map_info);
 		mlx_loop(map_info->mlx);
-		// atexit(ff);
 		/*************************************************/
+		ft_free_matrix(map_info->map1, map_info->map1_height);
 		close(fd);
 		free_map(map_info->map); 
 		free_map_info(map_info);

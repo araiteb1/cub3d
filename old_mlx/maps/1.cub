@@ -1,7 +1,7 @@
-NOp ./textures/redbrick.xpm
-SOkkk ./textures/bluestone.xpm
-WE ./textures/greystone.xpm
-EA ./textures/wood.xpm
+NO ./textures/redbrick.xpm
+SO ./textures/bluestone.xpm
+WE ./textures/wall_tex_a.xpm
+EA ./textures/wall_tex_b.xpm
 F 30,39,44
 C 30,39,44
 

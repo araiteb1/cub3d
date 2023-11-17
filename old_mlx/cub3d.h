@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 12:45:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/16 16:43:54 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:14:58 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define HEIGHT 720
 # define TILE_SIZE 64
 
-# define MVSPEED			0.5
-# define ROTSPEED			0.3
+# define MVSPEED			0.9
+# define ROTSPEED			0.2
 
 #define MINIMAP_SCALE_FACTOR 2
 
@@ -226,7 +226,7 @@ void  add_algo(t_raycast *rc, t_map_info *mp);
 void  get_side_dist(t_map_info *mp, t_raycast *rc);
 void  get_coordinate(t_raycast *rc, int x, t_map_info *mp);
 void draw_line_pixel(t_raycast *rc, t_map_info *mp, int x);
-
+void	ft_free_matrix(int **str, int size);
 void  rotation(t_map_info *mp, int key);
 int    close_win(t_map_info *mp);
 int key_definie(int key ,t_map_info *mp);
