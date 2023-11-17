@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:10 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/17 13:00:16 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/17 16:19:01 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	get_curr_pathtxt(t_map_info *mp)
 {
 	if (!mp->textur)
 		return ;
-	if (mp->textur == mp->no_texture)
+	if (!ft_strcmp(mp->textur, mp->no_texture))
 		mp->textur1 = ft_strdup(mp->paths[0]);
-	if (mp->textur == mp->so_texture)
+	if (!ft_strcmp(mp->textur, mp->so_texture))
 		mp->textur1 = ft_strdup(mp->paths[1]);
-	if (mp->textur == mp->ea_texture)
+	if (!ft_strcmp(mp->textur, mp->ea_texture))
 		mp->textur1 = ft_strdup(mp->paths[3]);
-	if (mp->textur == mp->we_texture)
+	if (!ft_strcmp(mp->textur, mp->we_texture))
 		mp->textur1 = ft_strdup(mp->paths[2]);
 }
 
@@ -34,7 +34,7 @@ void	init_data_tex(t_raycast *rc, t_map_info *mp)
 	get_curr_pathtxt(mp);
 	mp->texture->ptr = mlx_xpm_file_to_image(mp->mlx, mp->textur1,
 			&mp->texture->width, &mp->texture->height);
-	free (mp->textur1);
+	free(mp->textur1);
 	if (!mp->texture->ptr)
 		return ;
 	mp->texture->addr = mlx_get_data_addr(mp->texture->ptr, &mp->texture->bpp,

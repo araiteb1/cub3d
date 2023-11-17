@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:27:36 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/17 13:12:24 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:38:23 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,16 +150,16 @@ void	ft_free_matrix(int **str, int size)
 	free(str);
 }
 
-void  f()
-{
-	system("leaks cub3D");
-}
+// void  f()
+// {
+// 	system("leaks cub3D");
+// }
 int main(int ac, char **av)
 {
 	int fd;
 	t_map_info *map_info;
 
-	atexit(f);
+	// atexit(f);
 	if (ac == 2)
 	{
 		if(!check_extension_of_file(av[1]))
