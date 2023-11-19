@@ -1,9 +1,9 @@
 C 99,99,99
-NO ./textures/redbrick.xpm
-SO ./textures/bluestone.xpm
-WE ./textures/greystone.xpm
-EA ./textures/wood.xpm
+NO                    /Users/arabiai/Desktop/intra_cube/mandatory/textures/space0_1.xpm
+WE /Users/arabiai/Desktop/intra_cube/mandatory/textures/orange.xpm
 F 60,60,75
+SO /Users/arabiai/Desktop/intra_cube/mandatory/textures/octopus.xpm
+EA        /Users/arabiai/Desktop/intra_cube/mandatory/textures/lwodo7.xpm
 
                          111111111
                         10000000001

@@ -6,7 +6,7 @@
 #    By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/17 13:07:18 by araiteb          ###   ########.fr        #
+#    Updated: 2023/11/19 03:58:58 by araiteb          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,22 +14,18 @@ NAME = cub3D
 
 CC = cc
 INCLUDES=.
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
-# LIBMLX = $(HOME)/MLX42
-# LIBS   = libmlx42/libmlx42.a -ldl -lglfw -pthread -lm
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 LDIR=-L /usr/local/lib/
 LIBS=-lmlx -framework OpenGL -framework AppKit
-
-# NAME_FRAME_WORK = -framework Cocoa -framework OpenGL -framework IOKit
-
 
 GLFWLIB := $(HOME)/.brew/opt/glfw/lib
 
 get_next_line = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
-SRCS = main.c parsing/file_error.c parsing/init_map.c parsing/file_parsing.c parsing/file_parsing_1.c parsing/file_parsing_2.c parsing/file_parsing_3.c parsing/file_parsing_4.c\
-		mlx/init_mlx.c mlx/utils.c mlx/utils1.c mlx/player_move.c  execution/function_raycas.c execution/draw.c execution/func_key_hook.c
+SRCS = main.c parsing/file1.c parsing/file2.c parsing/file3.c parsing/file4.c parsing/file5.c parsing/file6.c \
+	parsing/file7.c parsing/file8.c execution/draw.c execution/func_key_hook.c execution/function_raycas.c \
+	execution/data_texture.c execution/map_to_int.c execution/data_mlx.c
 
 SRCS_ALL_FILES = $(SRCS) $(get_next_line)
 
@@ -43,7 +39,7 @@ $(NAME): $(OBJS)
 	make -C ./libft
 	$(CC) $(CFLAGS) $(LDIR) $(LIBS) -I$(GLFWLIB) $(OBJS) $(LIBFT) -o $(NAME)
 
-%.o: %.c 
+%.o: %.c cub3d.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
