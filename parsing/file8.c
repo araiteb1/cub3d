@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   file8.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 22:09:02 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:10:30 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/20 04:09:59 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
 void	free_map_info(t_map_info *map_info)
 {
 	free(map_info->no_texture);
@@ -48,7 +49,7 @@ void	free_map(char **map)
 	free(map);
 }
 
-void free_all_parsing(t_map_info *map_info)
+void	free_all_parsing(t_map_info *map_info)
 {
 	free_paths(map_info);
 	free_map(map_info->map);

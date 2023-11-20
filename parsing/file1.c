@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:19:20 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:00:31 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/20 03:16:54 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@ t_map_info	*init_map(char *fileName)
 {
 	t_map_info	*map_info;
 
-	map_info = malloc(sizeof(t_map_info));
+	map_info = (t_map_info *) malloc(sizeof(t_map_info));
 	if (!map_info)
+	{
 		writing_error("Failed to allocate memory");
+		return NULL;
+	}
+	map_info->info_player = (t_player *)malloc(sizeof(t_player));
+	if(!map_info->info_player)
+		return NULL;
 	map_info->no_texture = NULL;
 	map_info->so_texture = NULL;
 	map_info->we_texture = NULL;
@@ -36,6 +42,8 @@ t_map_info	*init_map(char *fileName)
 	map_info->c_color = -1;
 	map_info->f_color = -1;
 	map_info->map = NULL;
+	map_info->map1_height = 0;
+	map_info->map1_width = 0;
 	map_info->num_lines = 0;
 	map_info->num_cols = 0;
 	map_info->fileName = fileName;

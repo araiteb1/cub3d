@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file7.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:44:51 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:07:19 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/20 04:10:30 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ int isMapClosed(t_map_info *map_info)
 		j = 0;
 		while (map_info->map[i][j])
 		{
+			if (map_info->map[i][j] == 'N' 
+				|| map_info->map[i][j] == 'S' || map_info->map[i][j] == 'W' 
+				|| map_info->map[i][j] == 'E')
+			{
+				map_info->info_player->x_pos = i;
+				map_info->info_player->y_pos = j;
+			}
 			if (map_info->map[i][j] == '0' || map_info->map[i][j] == 'N' 
 				|| map_info->map[i][j] == 'S' || map_info->map[i][j] == 'W' 
 				|| map_info->map[i][j] == 'E')

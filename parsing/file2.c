@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:53:55 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:12:02 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/18 22:59:23 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	fill_textures(t_map_info *map_info, char *line)
 {
 	char	*tmp_line;
 	int		start;
-	
+
 	start = 0;
 	tmp_line = ft_strtrim(line, " ");
 	if (tmp_line[ft_strlen(tmp_line) - 1] == '\n')

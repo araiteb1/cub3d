@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:58:19 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:12:29 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/20 02:31:01 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	init_path(t_map_info *map_info)
 	if (!map_info->paths)
 		return (1);
 	map_info->paths[0] = get_path(map_info->no_texture);
-	// printf("==> |%s|\n", map_info->paths[0]);
+	pars_textures(map_info, map_info->paths[0], &map_info->texture[0]);
 	map_info->paths[1] = get_path(map_info->so_texture);
-	// printf("==> |%s|\n", map_info->paths[1]);
+	pars_textures(map_info, map_info->paths[1], &map_info->texture[1]);
 	map_info->paths[2] = get_path(map_info->we_texture);
-	// printf("==> |%s|\n", map_info->paths[2]);
+	pars_textures(map_info, map_info->paths[2], &map_info->texture[2]);
 	map_info->paths[3] = get_path(map_info->ea_texture);
-	// printf("==> |%s|\n", map_info->paths[3]);
+	pars_textures(map_info, map_info->paths[3], &map_info->texture[3]);
 	map_info->paths[4] = NULL;
 	if (!map_info->paths[0] || !map_info->paths[1]
 		|| !map_info->paths[2] || !map_info->paths[3])

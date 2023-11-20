@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:17:03 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:09:58 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/20 03:29:41 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,33 @@
 #include "./libft/libft.h"
 #include "./get_next_line/get_next_line.h"
 
+# define WIDTH 1280
+# define HEIGHT 720
 
+# define MVSPEED			0.9
+# define ROTSPEED			0.2
+
+#define KEY_RIGHT 124
+#define KEY_LEFT 123
+#define KEY_UP 126
+#define KEY_DOWN 125
+#define KEY_ESC 53
+#define KEY_A 0
+#define KEY_D 2
+#define KEY_W 13
+#define KEY_S 1
+
+typedef struct s_img
+{
+	void    *img;
+    char    *addr;
+    int     bpp;
+    int     line_length;
+    int     end;
+    int     width;
+    int     height;
+    void    *ptr;
+}	t_img;
 typedef struct s_player
 {
 	double x_pos;
@@ -37,10 +63,35 @@ typedef struct s_player
 	double rotationSpeed;
 }	t_player;
 
+typedef struct s_raycast
+{
+    int	line;
+    int start;
+    int end;
+    double wallx;
+    double camerax;
+    double raydirx;
+    double raydiry;
+    int  mapx;
+    int  mapy;
+    double deltadistx;
+    double deltadisty;
+    double sidedistx;
+    double sidedisty;
+    double perp_walldist;
+    int stepx;
+    int stepy;
+    int hit;
+    int side;
+} t_raycast;
+
 typedef struct	s_map_info
 {
 	char **map;
+	int 	**map1;
 	int num_lines;
+	int map1_height;
+	int map1_width;
 	int num_cols;
 	char *no_texture;
 	char *so_texture;
@@ -53,6 +104,15 @@ typedef struct	s_map_info
 	char *fileName;
 	t_player		*info_player;
 	char		**paths;
+	void 			*mlx;
+	void 			*win;
+	t_img			*img;
+	double		pos_tex;
+	double		step_tex;
+	int			x_tex;
+	int			y_tex;
+	t_img	*textur;
+	t_img	*texture[4];
 }	t_map_info;
 
 // file1.c
@@ -108,4 +168,25 @@ void 	free_all_parsing(t_map_info *map_info);
 void	free_map(char **map);
 void	free_paths(t_map_info *map_info);
 void	free_map_info(t_map_info *map_info);
+
+//*--------execution-----------*//
+
+void	pars_textures(t_map_info *mp, char *path, t_img **texture);
+void	init_data_tex(t_raycast *rc, t_map_info *mp);
+void	raycast_data(t_map_info *mp);
+void	draw_line(t_raycast *rc, t_map_info *mp);
+void	add_algo(t_raycast *rc, t_map_info *mp);
+void	get_side_dist(t_map_info *mp, t_raycast *rc);
+void	get_coordinate(t_raycast *rc, int x, t_map_info *mp);
+void	draw_line_pixel(t_raycast *rc, t_map_info *mp, int x);
+void	ft_free_matrix(int **str, int size);
+void	rotation(t_map_info *mp, int key);
+int		close_win(t_map_info *mp);
+int		key_definie(int key ,t_map_info *mp);
+int		color_for_tex(t_map_info *mp);
+void	init_data_tex(t_raycast *rc, t_map_info *mp);
+char	*join_raw_map(t_map_info *mp);
+void	init_int_map(t_map_info *mp);
+void	init_data_dir(t_map_info *mp, char dir);
+void	init_mlx(t_map_info *map_info);
 # endif
