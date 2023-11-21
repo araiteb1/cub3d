@@ -6,7 +6,7 @@
 #    By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/20 03:53:06 by araiteb          ###   ########.fr        #
+#    Updated: 2023/11/21 08:28:26 by araiteb          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 INCLUDES=.
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 LDIR=-L /usr/local/lib/
 LIBS=-lmlx -framework OpenGL -framework AppKit

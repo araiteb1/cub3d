@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 00:18:09 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/20 04:17:14 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:03:32 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ void	init_int_map(t_map_info *mp)
 				init_data_dir(mp, lines[k]);
 			k++;
 		}
-		while (j < mp->map1_width)
-			mp->map1[i][j++] = 1;
 		k += (lines[k] == '\n');
 	}
 	free(lines);

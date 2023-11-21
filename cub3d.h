@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:17:03 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/20 03:29:41 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 11:30:54 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
-# define MVSPEED			0.9
+# define MVSPEED			0.5
 # define ROTSPEED			0.2
 
 #define KEY_RIGHT 124
@@ -189,4 +189,5 @@ char	*join_raw_map(t_map_info *mp);
 void	init_int_map(t_map_info *mp);
 void	init_data_dir(t_map_info *mp, char dir);
 void	init_mlx(t_map_info *map_info);
+void	pixel_put(t_map_info *mp, int x, int y, int color);
 # endif

@@ -6,11 +6,34 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:10 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/20 04:33:07 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 12:42:17 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	pixel_put(t_map_info *mp, int x, int y, int color)
+{
+	int	pixel;
+
+	if (mp->img->bpp != 32)
+		color = mlx_get_color_value(mp->mlx, color);
+	pixel = (y * mp->img->line_length) + (x * (mp->img->bpp / 8));
+	if (mp->img->end == 1)
+	{
+		mp->img->addr[pixel + 0] = (color >> 24);
+		mp->img->addr[pixel + 1] = (color >> 16) & 0xFF;
+		mp->img->addr[pixel + 2] = (color >> 8) & 0xFF;
+		mp->img->addr[pixel + 3] = (color) & 0xFF;
+	}
+	else if (mp->img->end == 0)
+	{
+		mp->img->addr[pixel + 0] = (color) & 0xFF;
+		mp->img->addr[pixel + 1] = (color >> 8) & 0xFF;
+		mp->img->addr[pixel + 2] = (color >> 16) & 0xFF;
+		mp->img->addr[pixel + 3] = (color >> 24);
+	}
+}
 
 int	color_for_tex(t_map_info *mp)
 {
@@ -36,14 +59,14 @@ void	draw_line_pixel(t_raycast *rc, t_map_info *mp, int x)
 
 	y = 0;
 	while (y < rc->start)
-		mlx_pixel_put(mp->mlx, mp->win, x, y++, mp->c_color);
+		pixel_put(mp, x, y++, mp->c_color);
 	init_data_tex(rc, mp);
 	while (y < rc->end)
 	{
 		mp->y_tex = (int)mp->pos_tex & (mp->textur->height - 1);
 		mp->pos_tex += mp->step_tex;
-		mlx_pixel_put(mp->mlx, mp->win, x, y++, color_for_tex(mp));
+		pixel_put(mp, x, y++, color_for_tex(mp));
 	}
 	while (y < HEIGHT)
-		mlx_pixel_put(mp->mlx, mp->win, x, y++, mp->f_color);
+		pixel_put(mp, x, y++, mp->f_color);
 }

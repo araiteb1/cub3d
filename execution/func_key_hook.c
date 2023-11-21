@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:21 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/20 04:14:37 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 11:37:39 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,6 @@ int	key_definie(int key, t_map_info *mp)
 		move_right1(mp);
 	if (key == KEY_LEFT || key == KEY_RIGHT)
 		rotation(mp, key);
-	mlx_clear_window(mp->mlx, mp->win);
-	mlx_destroy_image(mp->mlx, mp->img->img);
-	mp->img->img = mlx_new_image(mp->mlx, WIDTH, HEIGHT);
 	raycast_data(mp);
 	return (1);
 }

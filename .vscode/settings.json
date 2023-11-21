@@ -1,3 +1,6 @@
 {
-    "git-blame.gitWebUrl": ""
+    "git-blame.gitWebUrl": "",
+    "files.associations": {
+        "cub3d.h": "c"
+    }
 }
