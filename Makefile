@@ -6,7 +6,7 @@
 #    By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/21 08:28:26 by araiteb          ###   ########.fr        #
+#    Updated: 2023/11/21 13:36:04 by araiteb          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ get_next_line = get_next_line/get_next_line.c get_next_line/get_next_line_utils.
 
 SRCS = main.c parsing/file1.c parsing/file2.c parsing/file3.c parsing/file4.c parsing/file5.c parsing/file6.c \
 	parsing/file7.c parsing/file8.c execution/draw.c execution/func_key_hook.c execution/function_raycas.c \
-	execution/data_texture.c execution/map_to_int.c execution/data_mlx.c
+	execution/data_texture.c execution/map_to_int.c execution/data_mlx.c execution/move.c
 
 SRCS_ALL_FILES = $(SRCS) $(get_next_line)
 

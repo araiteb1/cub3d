@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 00:18:09 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/21 13:03:32 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:47:49 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,22 @@ size_t	word_len(char const *str, char sep)
 
 size_t	max_len_line(const char *str, char sep)
 {
-	int	str_len;
-	int	max_len;
-	int	cur_len;
 	int	i;
+	int	len;
+	int	mxlen;
+	int	cur_len;
 
-	str_len = ft_strlen(str);
-	max_len = 0;
+	mxlen = 0;
 	i = 0;
-	while (i < str_len)
+	len = ft_strlen(str);
+	while (i < len)
 	{
 		cur_len = word_len(str + i, sep);
-		if (cur_len > max_len)
-			max_len = cur_len;
+		if (mxlen < cur_len)
+			mxlen = cur_len;
 		i += cur_len + 1;
 	}
-	return (max_len);
+	return (mxlen);
 }
 
 char	*join_raw_map(t_map_info *mp)
@@ -111,20 +111,20 @@ void	init_int_map(t_map_info *mp)
 	free(lines);
 }
 
-void	init_data_dir(t_map_info *mp, char dir)
+void	init_data_dir(t_map_info *mp, char direc)
 {
-	if (dir == 'W' || dir == 'E')
+	if (direc == 'W' || direc == 'E')
 	{
 		mp->info_player->dirx = 0;
-		mp->info_player->diry = (-(dir == 'W') || 1.0);
-		mp->info_player->planex = 0.66 * (-(dir == 'W') || 1.0);
+		mp->info_player->diry = (-(direc == 'W') || 1.0);
+		mp->info_player->planex = 0.66 * (-(direc == 'W') || 1.0);
 		mp->info_player->planey = 0.0;
 	}
-	else if (dir == 'N' || dir == 'S')
+	else if (direc == 'N' || direc == 'S')
 	{
-		mp->info_player->dirx = (-(dir == 'S') || 1.0);
+		mp->info_player->dirx = (-(direc == 'S') || 1.0);
 		mp->info_player->diry = 0.0;
 		mp->info_player->planex = 0.0;
-		mp->info_player->planey = -0.66 * (-(dir == 'S') || 1.0);
+		mp->info_player->planey = -0.66 * (-(direc == 'S') || 1.0);
 	}
 }
