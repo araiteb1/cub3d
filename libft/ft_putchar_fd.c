@@ -6,13 +6,13 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:16:51 by ahaloui           #+#    #+#             */
-/*   Updated: 2022/11/12 15:06:06 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/21 21:20:31 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include<stdio.h>
-#include<fcntl.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 void	ft_putchar_fd(char c, int fd)
 {

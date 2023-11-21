@@ -6,13 +6,13 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 20:51:18 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 21:42:17 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:04:35 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int check_line_of_map(char *line)
+int	check_line_of_map(char *line)
 {
 	int	i;
 
@@ -23,68 +23,66 @@ int check_line_of_map(char *line)
 	{
 		if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'N' && line[i] != 'W'
-			&& line[i] != 'S' && line[i] != 'E'
-			&& line[i] != ' ')
-		return (1);
+			&& line[i] != 'S' && line[i] != 'E' && line[i] != ' ')
+			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int get_biggest_line(char **map)
+int	get_biggest_line(char **map)
 {
-    int i;
-    int j;
-    int max_line;
+	int	i;
+	int	j;
+	int	max_line;
 
-    i = 0;
-    max_line = 0;
-    while (map[i])
-    {
-        j = ft_strlen(map[i]);
-        if (j > max_line)
-            max_line = j;
-        i++;
-    }
-    return (max_line);
+	i = 0;
+	max_line = 0;
+	while (map[i])
+	{
+		j = ft_strlen(map[i]);
+		if (j > max_line)
+			max_line = j;
+		i++;
+	}
+	return (max_line);
 }
 
-
-int check_all_spaces(char *line)
+int	check_all_spaces(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (line[i])
-    {
-        if(line[i] != ' ')
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-void fill_map(t_map_info *map_info)
+void	fill_map(t_map_info *map_info)
 {
-    int i;
-    int j;
-    int max_line;
+	int	i;
+	int	j;
+	int	max_line;
 
-    i = 0;
-    max_line = get_biggest_line(map_info->map);
-    map_info->num_cols = max_line;
-    while (map_info->map[i])
-    {
-        if (check_all_spaces(map_info->map[i]))
+	i = 0;
+	max_line = get_biggest_line(map_info->map);
+	map_info->num_cols = max_line;
+	while (map_info->map[i])
+	{
+		if (check_all_spaces(map_info->map[i]))
 			writing_error("Map is not valid");
-        j = ft_strlen(map_info->map[i]);
-        while (j < max_line)
-        {
-            map_info->map[i] = ft_strjoin(map_info->map[i], " ");
-            j++;
-        }
-        i++;
-    }
+		j = ft_strlen(map_info->map[i]);
+		while (j < max_line)
+		{
+			map_info->map[i] = ft_strjoin(map_info->map[i], " ");
+			j++;
+		}
+		i++;
+	}
 }
 
 int	surround_map(t_map_info *map_info)
@@ -98,9 +96,9 @@ int	surround_map(t_map_info *map_info)
 		j = 0;
 		while (map_info->map[i][j])
 		{
-			if (i == 0 || i ==  map_info->num_lines - 1)
+			if (i == 0 || i == map_info->num_lines - 1)
 			{
-				if (map_info->map[i][j] != '1' && map_info->map[i][j] != ' ' )
+				if (map_info->map[i][j] != '1' && map_info->map[i][j] != ' ')
 					return (1);
 			}
 			else if (j == 0 || j == (int)ft_strlen(map_info->map[i]) - 1)

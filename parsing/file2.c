@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   file2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:53:55 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:59:23 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 17:56:28 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub3d.h"
+#include "../cub3d.h"
 
-int valide_texture(char *line)
+int	valide_texture(char *line)
 {
 	char	*tmp_line;
 	char	*tmp_line1;
@@ -40,7 +40,7 @@ int valide_texture(char *line)
 	return (free(tmp_line1), free(tmp_line), 1);
 }
 
-void help_fill_textures_1(t_map_info *map_info, char *line, char *tmp_line)
+void	help_fill_textures_1(t_map_info *map_info, char *line, char *tmp_line)
 {
 	if (ft_strcmp(tmp_line, "NO"))
 		map_info->no_texture = ft_strdup(line);
@@ -62,10 +62,10 @@ void help_fill_textures_1(t_map_info *map_info, char *line, char *tmp_line)
 	}
 }
 
-int help_fill_textures(t_map_info *map_info, char *line)
+int	help_fill_textures(t_map_info *map_info, char *line)
 {
-	int start;
-	char *tmp_line;
+	int		start;
+	char	*tmp_line;
 
 	if (!line)
 		return (1);
@@ -106,6 +106,3 @@ int	help_read_textures(t_map_info *map_info, char *line, int *nb_textures)
 		writing_error("Textures Missign");
 	return (0);
 }
-
-
-

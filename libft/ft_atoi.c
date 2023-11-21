@@ -6,11 +6,11 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:22:33 by ahaloui           #+#    #+#             */
-/*   Updated: 2022/11/12 13:58:30 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/21 21:19:16 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 static int	is_white_space(char c)
 {

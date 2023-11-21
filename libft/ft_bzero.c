@@ -6,12 +6,12 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 15:38:29 by ahaloui           #+#    #+#             */
-/*   Updated: 2022/11/03 12:39:04 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/21 21:19:36 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include<stdio.h>
+#include <stdio.h>
 
 void	ft_bzero(void *s, size_t n)
 {

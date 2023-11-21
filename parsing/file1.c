@@ -3,16 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   file1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:19:20 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/21 13:32:41 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 21:14:50 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void writing_error(char *str)
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2 [i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	if (s1[i] == '\0' && s2 [i] == '\0')
+		return (1);
+	return (0);
+}
+
+void	writing_error(char *str)
 {
 	ft_putstr_fd("Error: ", 1);
 	ft_putstr_fd(str, 1);
@@ -26,13 +42,10 @@ t_map_info	*init_map(char *fileName)
 
 	map_info = (t_map_info *) malloc(sizeof(t_map_info));
 	if (!map_info)
-	{
-		writing_error("Failed to allocate memory");
-		return NULL;
-	}
+		return (NULL);
 	map_info->info_player = (t_player *)malloc(sizeof(t_player));
-	if(!map_info->info_player)
-		return NULL;
+	if (!map_info->info_player)
+		return (NULL);
 	map_info->no_texture = NULL;
 	map_info->so_texture = NULL;
 	map_info->we_texture = NULL;
@@ -46,16 +59,15 @@ t_map_info	*init_map(char *fileName)
 	map_info->map1_width = 0;
 	map_info->num_lines = 0;
 	map_info->num_cols = 0;
-	map_info->fileName = fileName;
+	map_info->file_name = fileName;
 	map_info->paths = NULL;
 	return (map_info);
 }
 
-
-int check_file_name(char *str)
+int	check_file_name(char *str)
 {
 	int	len;
-	
+
 	if (!str)
 		return (1);
 	len = ft_strlen(str);
@@ -65,50 +77,25 @@ int check_file_name(char *str)
 	return (1);
 }
 
-int parsing(int ac, char *str, t_map_info *map_info)
-{
-	if (ac != 2)
-		return (1);
-	if (check_file_name(str))
-		return (2);
-	if (read_textures(map_info))
-		return (3);
-	if (check_textures(map_info))
-		return (4);
-    if(init_path(map_info))
-		return (5);
-	if (read_map(map_info))
-		return (6);
-	if (surround_map(map_info))
-		return (7);
-	if (isMapClosed(map_info))
-		return (8);
-	if (get_nb_player(map_info))
-		return (9);
-	return (0);
-}
-
-
 int	check_all_parsing(int ac, char *str, t_map_info *map_info)
 {
-	int	result_of_parsing;
-
-	result_of_parsing = parsing(ac, str, map_info);
-	if (result_of_parsing == 1)
+	if (ac != 2)
 		writing_error("Wrong Number of Argumets");
-	if (result_of_parsing == 2)
+	if (check_file_name(str))
 		writing_error("Wrong file extension");
-	if ((result_of_parsing == 3) || (result_of_parsing == 4))
+	if (read_textures(map_info))
 		writing_error("Textures Missign");
-	if (result_of_parsing == 5)
+	if (check_textures(map_info))
+		writing_error("Textures Missign");
+	if (init_path(map_info))
 		writing_error("Wrong path to texture");
-	if (result_of_parsing == 6)
+	if (read_map(map_info))
 		writing_error("Textures Duplicated or missing");
-	if (result_of_parsing == 7)
+	if (surround_map(map_info))
 		writing_error("Map is not surrounded by walls");
-	if (result_of_parsing == 8)
+	if (check_is_map_closed(map_info))
 		writing_error("Map is not closed");
-	if (result_of_parsing == 9)
+	if (get_nb_player(map_info))
 		writing_error("Map must have one player");
 	return (0);
 }

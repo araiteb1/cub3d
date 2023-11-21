@@ -3,37 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   file7.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:44:51 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/20 04:10:30 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:10:35 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int create_trgb(int t, int r, int g, int b)
+void	init_player_positon(t_map_info *map_info, int i, int j)
 {
-    return (t << 24 | r << 16 | g << 8 | b);
+	map_info->info_player->x_pos = i;
+	map_info->info_player->y_pos = j;
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	create_trgb(int t, int r, int g, int b)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2 [i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	if (s1[i] == '\0' && s2 [i] == '\0')
-		return (1);
-	return (0);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int check_each_side(char **map, int i, int j)
+int	check_each_side(char **map, int i, int j)
 {
 	if (map[i][j + 1] == ' '
 		|| map[i][j - 1] == ' '
@@ -43,10 +33,10 @@ int check_each_side(char **map, int i, int j)
 	return (0);
 }
 
-int isMapClosed(t_map_info *map_info)
+int	check_is_map_closed(t_map_info *map_info)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map_info->map[i])
@@ -57,15 +47,13 @@ int isMapClosed(t_map_info *map_info)
 			if (map_info->map[i][j] == 'N' 
 				|| map_info->map[i][j] == 'S' || map_info->map[i][j] == 'W' 
 				|| map_info->map[i][j] == 'E')
-			{
-				map_info->info_player->x_pos = i;
-				map_info->info_player->y_pos = j;
-			}
+				init_player_positon(map_info, i, j);
 			if (map_info->map[i][j] == '0' || map_info->map[i][j] == 'N' 
-				|| map_info->map[i][j] == 'S' || map_info->map[i][j] == 'W' 
+				|| map_info->map[i][j] == 'S'
+				|| map_info->map[i][j] == 'W' 
 				|| map_info->map[i][j] == 'E')
-			if (check_each_side(map_info->map, i, j))
-				return (1);
+				if (check_each_side(map_info->map, i, j))
+					return (1);
 			j++;
 		}
 		i++;
@@ -73,14 +61,14 @@ int isMapClosed(t_map_info *map_info)
 	return (0);
 }
 
-int get_nb_player(t_map_info *map_info)
+int	get_nb_player(t_map_info *map_info)
 {
-	int i;
-	int j;
-	int playerCount;
+	int	i;
+	int	j;
+	int	player_count;
 
 	i = 0;
-	playerCount = 0;
+	player_count = 0;
 	while (i < map_info->num_lines)
 	{
 		j = 0;
@@ -88,12 +76,12 @@ int get_nb_player(t_map_info *map_info)
 		{
 			if (map_info->map[i][j] == 'N' || map_info->map[i][j] == 'S' 
 				|| map_info->map[i][j] == 'W' || map_info->map[i][j] == 'E')
-				playerCount++;
+				player_count++;
 			j++;
 		}
 		i++;
 	}
-	if (playerCount != 1)
+	if (player_count != 1)
 		return (1);
 	return (0);
 }

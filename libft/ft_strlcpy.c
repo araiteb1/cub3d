@@ -6,11 +6,11 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:51:04 by ahaloui           #+#    #+#             */
-/*   Updated: 2022/11/01 11:54:02 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/21 21:20:38 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 size_t	ft_strlcpy(char	*dst, const char	*src, size_t	dstsize)
 {

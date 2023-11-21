@@ -6,15 +6,15 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:45:53 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/18 22:07:53 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:16:25 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int skip_textures(t_map_info *map_info,char *line)
+int	skip_textures(t_map_info *map_info, char *line)
 {
-	char *tmp_line;
+	char	*tmp_line;
 
 	tmp_line = ft_strtrim(line, " ");
 	if (tmp_line[ft_strlen(tmp_line) - 1] == '\n')
@@ -34,10 +34,9 @@ int skip_textures(t_map_info *map_info,char *line)
 	return (free(tmp_line), 0);
 }
 
-
-int count_lines_part_1(int fd, char *line)
+int	count_lines_part_1(int fd, char *line)
 {
-	int nb_lines;
+	int	nb_lines;
 
 	nb_lines = 0;
 	while (line)
@@ -53,13 +52,13 @@ int count_lines_part_1(int fd, char *line)
 	return (nb_lines);
 }
 
-int count_lines_part_2(t_map_info *map_info)
+int	count_lines_part_2(t_map_info *map_info)
 {
 	char	*line;
 	int		nb_lines;
 	int		fd;
 
-	fd = open(map_info->fileName, O_RDONLY);
+	fd = open(map_info->file_name, O_RDONLY);
 	if (fd == -1)
 		writing_error("Failed to open file");
 	nb_lines = 0;
@@ -79,10 +78,10 @@ int count_lines_part_2(t_map_info *map_info)
 	return (nb_lines);
 }
 
-void help_read_map(int fd, t_map_info *map_info, char *line)
+void	help_read_map(int fd, t_map_info *map_info, char *line)
 {
-	int size_map;
-	int len;
+	int	size_map;
+	int	len;
 
 	size_map = 0;
 	map_info->num_lines = count_lines_part_2(map_info);
@@ -104,16 +103,17 @@ void help_read_map(int fd, t_map_info *map_info, char *line)
 		line = get_next_line(fd);
 	}
 	map_info->map[map_info->num_lines] = NULL;
+	fill_map(map_info);
 	close(fd);
 }
 
-int    read_map(t_map_info *map_info)
+int	read_map(t_map_info *map_info)
 {
 	int		fd;
-	int     nb_textures;
-	char    *line;
+	int		nb_textures;
+	char	*line;
 
-	fd = open(map_info->fileName, O_RDONLY);
+	fd = open(map_info->file_name, O_RDONLY);
 	if (fd == -1)
 		writing_error("Failed to open file");
 	line = get_next_line(fd);
@@ -121,7 +121,7 @@ int    read_map(t_map_info *map_info)
 	while (line)
 	{
 		if (ft_strcmp(line, "\n") || skip_textures(map_info, line))
-		{	
+		{
 			if (skip_textures(map_info, line))
 				nb_textures++;
 			if (nb_textures > 6)
@@ -133,6 +133,5 @@ int    read_map(t_map_info *map_info)
 			break ;
 	}
 	help_read_map(fd, map_info, line);
-	fill_map(map_info);
 	return (0);
 }

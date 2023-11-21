@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:58:19 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/20 02:31:01 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/21 21:16:26 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_textures(t_map_info *map_info)
 	return (0);
 }
 
-char *get_path(char *str)
+char	*get_path(char *str)
 {
 	int		start;
 	char	*path;
@@ -47,7 +47,7 @@ int	check_paths(t_map_info *map_info)
 	i = 0;
 	while (i < 4)
 	{
-		if (open(map_info->paths[i], O_RDONLY) == -1)
+		if (access(map_info->paths[i], F_OK) == -1)
 			return (1);
 		i++;
 	}
@@ -82,7 +82,7 @@ int	read_textures(t_map_info *map_info)
 	int		nb_textures;
 	char	*line;
 
-	fd = open(map_info->fileName, O_RDONLY);
+	fd = open(map_info->file_name, O_RDONLY);
 	if (fd == -1)
 		writing_error("Failed to open file");
 	nb_textures = 0;
@@ -96,7 +96,7 @@ int	read_textures(t_map_info *map_info)
 			if (help_read_textures(map_info, line, &nb_textures))
 				return (1);
 			if (nb_textures == 6)
-				break;
+				break ;
 		}
 		line = get_next_line(fd);
 	}
