@@ -6,58 +6,11 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 00:18:09 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/21 13:47:49 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/22 08:52:19 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	len_line(char const *str, char sep)
-{
-	int	wcount;
-	int	i;
-
-	wcount = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == sep)
-			wcount++;
-		i++;
-	}
-	wcount++;
-	return (wcount);
-}
-
-size_t	word_len(char const *str, char sep)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len] && str[len] != sep)
-		len++;
-	return (len);
-}
-
-size_t	max_len_line(const char *str, char sep)
-{
-	int	i;
-	int	len;
-	int	mxlen;
-	int	cur_len;
-
-	mxlen = 0;
-	i = 0;
-	len = ft_strlen(str);
-	while (i < len)
-	{
-		cur_len = word_len(str + i, sep);
-		if (mxlen < cur_len)
-			mxlen = cur_len;
-		i += cur_len + 1;
-	}
-	return (mxlen);
-}
 
 char	*join_raw_map(t_map_info *mp)
 {
@@ -76,6 +29,25 @@ char	*join_raw_map(t_map_info *mp)
 	return (lines);
 }
 
+void	init_data_map1(t_map_info *mp, char *lines)
+{
+	mp->map1_height = len_line(lines, '\n');
+	mp->map1 = (int **)malloc(mp->map1_height * sizeof(int *));
+	if (!mp->map1)
+		return ;
+	mp->map1_width = max_len_line(lines, '\n');
+}
+
+void	init_line_map1(char c, int i, int *j, t_map_info *mp)
+{
+	if (c == ' ')
+		mp->map1[i][(*j)++] = 1;
+	else if (c == '0' || c == '1')
+		mp->map1[i][(*j)++] = c - '0';
+	else
+		get_coord_direct(mp, c);
+}
+
 void	init_int_map(t_map_info *mp)
 {
 	int		i;
@@ -84,47 +56,21 @@ void	init_int_map(t_map_info *mp)
 	char	*lines;
 
 	lines = join_raw_map(mp);
-	mp->map1_height = len_line(lines, '\n');
-	mp->map1 = (int **)malloc(mp->map1_height * sizeof(int *));
-	if (!mp->map1)
-		return ;
-	mp->map1_width = max_len_line(lines, '\n');
+	init_data_map1(mp, lines);
 	k = 0;
 	i = -1;
-	j = ft_strlen(lines);
-	while (++i < mp->map1_height)
+	while (++i < mp->map1_height && lines[k])
 	{
-		mp->map1[i] = (int *)ft_calloc(mp->map1_width + 1, sizeof(int));
+		mp->map1[i] = (int *)malloc((mp->map1_width + 1) * sizeof(int));
+		if (!mp->map1[i])
+			return ;
 		j = 0;
 		while (lines[k] && lines[k] != '\n' && j < mp->map1_width)
 		{
-			if (lines[k] == ' ')
-				mp->map1[i][j++] = 1;
-			else if (lines[k] == '0' || lines[k] == '1')
-				mp->map1[i][j++] = lines[k] - '0';
-			else
-				init_data_dir(mp, lines[k]);
+			init_line_map1(lines[k], i, &j, mp);
 			k++;
 		}
 		k += (lines[k] == '\n');
 	}
 	free(lines);
-}
-
-void	init_data_dir(t_map_info *mp, char direc)
-{
-	if (direc == 'W' || direc == 'E')
-	{
-		mp->info_player->dirx = 0;
-		mp->info_player->diry = (-(direc == 'W') || 1.0);
-		mp->info_player->planex = 0.66 * (-(direc == 'W') || 1.0);
-		mp->info_player->planey = 0.0;
-	}
-	else if (direc == 'N' || direc == 'S')
-	{
-		mp->info_player->dirx = (-(direc == 'S') || 1.0);
-		mp->info_player->diry = 0.0;
-		mp->info_player->planex = 0.0;
-		mp->info_player->planey = -0.66 * (-(direc == 'S') || 1.0);
-	}
 }

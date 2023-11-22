@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 22:09:02 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/20 04:09:59 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/22 09:33:21 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,14 @@ void	free_map(char **map)
 
 void	free_all_parsing(t_map_info *map_info)
 {
+	int i; 
 	free_paths(map_info);
 	free_map(map_info->map);
 	free_map_info(map_info);
+	ft_free_matrix(map_info->map1, map_info->map1_height);
+	i = 0;
+	while (map_info->texture[i])
+		free(map_info->texture[i]);
+	if (map_info->img)
+		free (map_info->img);
 }

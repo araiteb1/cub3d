@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/21 13:42:08 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/22 13:25:40 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,24 +105,6 @@ void	draw_line(t_raycast *rc, t_map_info *mp)
 	else
 		rc->wallx = mp->info_player->x_pos + rc->perp_walldist * rc->raydirx;
 	rc->wallx -= floor(rc->wallx);
-}
-
-void	re_adapte_img(t_map_info *mp)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			pixel_put(mp, x, y, 0);
-			x++;
-		}
-		y++;
-	}
 }
 
 void	raycast_data(t_map_info *mp)
