@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:10 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/21 12:42:17 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:52:18 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 void	pixel_put(t_map_info *mp, int x, int y, int color)
 {
-	int	pixel;
+	int	cln;
 
 	if (mp->img->bpp != 32)
 		color = mlx_get_color_value(mp->mlx, color);
-	pixel = (y * mp->img->line_length) + (x * (mp->img->bpp / 8));
-	if (mp->img->end == 1)
+	cln = (y * mp->img->line_length) + (x * (mp->img->bpp / 8));
+	if (mp->img->end == 0)
 	{
-		mp->img->addr[pixel + 0] = (color >> 24);
-		mp->img->addr[pixel + 1] = (color >> 16) & 0xFF;
-		mp->img->addr[pixel + 2] = (color >> 8) & 0xFF;
-		mp->img->addr[pixel + 3] = (color) & 0xFF;
+		mp->img->addr[cln + 0] = (color) & 0xFF;
+		mp->img->addr[cln + 1] = (color >> 8) & 0xFF;
+		mp->img->addr[cln + 2] = (color >> 16) & 0xFF;
+		mp->img->addr[cln + 3] = (color >> 24);
 	}
-	else if (mp->img->end == 0)
+	else if (mp->img->end == 1)
 	{
-		mp->img->addr[pixel + 0] = (color) & 0xFF;
-		mp->img->addr[pixel + 1] = (color >> 8) & 0xFF;
-		mp->img->addr[pixel + 2] = (color >> 16) & 0xFF;
-		mp->img->addr[pixel + 3] = (color >> 24);
+		mp->img->addr[cln + 0] = (color >> 24);
+		mp->img->addr[cln + 1] = (color >> 16) & 0xFF;
+		mp->img->addr[cln + 2] = (color >> 8) & 0xFF;
+		mp->img->addr[cln + 3] = (color) & 0xFF;
 	}
 }
 

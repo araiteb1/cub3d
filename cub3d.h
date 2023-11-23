@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:17:03 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/21 21:25:32 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/23 08:04:41 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ void		add_algo(t_raycast *rc, t_map_info *mp);
 void		get_side_dist(t_map_info *mp, t_raycast *rc);
 void		get_coordinate(t_raycast *rc, int x, t_map_info *mp);
 void		draw_line_pixel(t_raycast *rc, t_map_info *mp, int x);
-void		ft_free_matrix(int **str, int size);
 void		rotation(t_map_info *mp, int key);
 int			close_win(t_map_info *mp);
 int			key_definie(int key, t_map_info *mp);
@@ -183,7 +182,19 @@ int			color_for_tex(t_map_info *mp);
 void		init_data_tex(t_raycast *rc, t_map_info *mp);
 char		*join_raw_map(t_map_info *mp);
 void		init_int_map(t_map_info *mp);
-void		init_data_dir(t_map_info *mp, char dir);
+void		get_coord_direct(t_map_info *mp, char dir);
 void		init_mlx(t_map_info *map_info);
 void		pixel_put(t_map_info *mp, int x, int y, int color);
+int			len_line(char const *str, char sep);
+size_t		word_len(char const *str, char sep);
+size_t		max_len_line(const char *str, char sep);
+void		re_adapte_img(t_map_info *mp);
+/*-------move-------*/
+
+void		check_if_wall(t_map_info *mp, double dx, double dy);
+void		move_up(t_map_info *mp);
+void		move_down(t_map_info *mp);
+void		move_left1(t_map_info *mp);
+void		move_right1(t_map_info *mp);
+void		ft_free_matrix(int **str, int size);
 #endif

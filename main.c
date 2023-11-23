@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:19:30 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/21 21:26:22 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/23 08:02:30 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ff()
+void	ft_free_matrix(int **str, int size)
 {
-	system("leaks cub3D");
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
 
 int	main(int ac, char **av)
 {
-	atexit(ff);
 	t_map_info	*map_info;
 
 	map_info = init_map(av[1]);

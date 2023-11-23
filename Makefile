@@ -3,26 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+         #
+#    By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/21 21:27:34 by ahaloui          ###   ########.fr        #
+#    Updated: 2023/11/22 14:49:18 by araiteb          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-CC = cc #-Ofast #-O3 -I /usr 
-
+CC = cc
+INCLUDES=.
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
+LDIR=-L /usr/local/lib/
 LIBS=-lmlx -framework OpenGL -framework AppKit
+
+GLFWLIB := $(HOME)/.brew/opt/glfw/lib
 
 get_next_line = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 SRCS = main.c parsing/file1.c parsing/file2.c parsing/file3.c parsing/file4.c parsing/file5.c parsing/file6.c \
 	parsing/file7.c parsing/file8.c execution/draw.c execution/func_key_hook.c execution/function_raycas.c \
-	execution/data_texture.c execution/map_to_int.c execution/data_mlx.c
+	execution/data_texture.c execution/map_to_int.c execution/data_mlx.c execution/move.c execution/map_int2.c
 
 SRCS_ALL_FILES = $(SRCS) $(get_next_line)
 
@@ -34,7 +37,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C ./libft
-	$(CC) $(CFLAGS) $(LIBS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(LDIR) $(LIBS) -I$(GLFWLIB) $(OBJS) $(LIBFT) -o $(NAME)
 
 %.o: %.c cub3d.h
 	$(CC) $(CFLAGS) -c $< -o $@

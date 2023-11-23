@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 10:27:26 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/21 11:04:17 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/23 08:03:30 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,10 @@ void	pars_textures(t_map_info *mp, char *path, t_img **texture)
 
 void	init_data_tex(t_raycast *rc, t_map_info *mp)
 {
-	mp->x_tex = (int)(rc->wallx * mp->textur->height);
-	if ((mp->textur == mp->texture[0]
-			|| mp->textur == mp->texture[1]) && rc->raydirx > 0)
-		mp->x_tex = mp->textur->width - mp->x_tex - 1;
-	if ((mp->textur == mp->texture[2]
-			|| mp->textur == mp->texture[3]) && rc->raydiry > 0)
-		mp->x_tex = mp->textur->width - mp->x_tex - 1;
+	int	x;
+
+	x = (int)(rc->wallx * mp->textur->height); 
+	mp->x_tex = mp->textur->width - x - 1;
 	mp->step_tex = (double)mp->textur->height / rc->line;
 	mp->pos_tex = (rc->start - HEIGHT / 2.0 + rc->line / 2.0) * mp->step_tex;
-	// printf("%f || %f \n",mp->step_tex,mp->pos_tex);
 }
