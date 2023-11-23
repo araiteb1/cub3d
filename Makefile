@@ -3,23 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+         #
+#    By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/22 14:49:18 by araiteb          ###   ########.fr        #
+#    Updated: 2023/11/23 12:59:00 by ahaloui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
 CC = cc
-INCLUDES=.
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
-LDIR=-L /usr/local/lib/
-LIBS=-lmlx -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
-GLFWLIB := $(HOME)/.brew/opt/glfw/lib
+LIBS = -lmlx -framework OpenGL -framework AppKit
 
 get_next_line = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
@@ -37,7 +34,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C ./libft
-	$(CC) $(CFLAGS) $(LDIR) $(LIBS) -I$(GLFWLIB) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBS) $(OBJS) $(LIBFT) -o $(NAME)
 
 %.o: %.c cub3d.h
 	$(CC) $(CFLAGS) -c $< -o $@
