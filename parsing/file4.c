@@ -6,7 +6,7 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 18:06:05 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/21 17:58:04 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/23 13:57:20 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,13 @@ int	get_color(char *line)
 	i = 1;
 	if (get_nb_commas(line) != 2)
 		writing_error("Colors");
-	while (line[i] == ' ')
-		i++;
 	colors = ft_split(&line[i], ',');
+	i = -1;
+	while (colors[++i])
+	{
+		if (check_is_digit(colors[i]))
+			writing_error("Colors");
+	}
 	if (!colors || get_size_array(colors) != 3)
 		writing_error("Colors");
 	i = 0;

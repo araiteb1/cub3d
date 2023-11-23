@@ -1,9 +1,9 @@
 C 10,10,10
-NO                    ./textures/space0_1.xpm
-WE ./textures/orange.xpm
+NO                    /Users/ahmaymou/Desktop/cub3d/textures/space0_1.xpm
+WE /Users/ahmaymou/Desktop/cub3d/textures/orange.xpm
 F 50,50,54
-SO ./textures/octopus.xpm
-EA        ./textures/lwodo7.xpm
+SO /Users/ahmaymou/Desktop/cub3d/textures/octopus.xpm
+EA        /Users/ahmaymou/Desktop/cub3d/textures/lwodo7.xpm
 
 
 
