@@ -6,13 +6,13 @@
 #    By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 13:24:40 by ahaloui           #+#    #+#              #
-#    Updated: 2023/11/23 12:59:00 by ahaloui          ###   ########.fr        #
+#    Updated: 2023/11/23 13:46:10 by ahaloui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-CC = cc
+CC = cc #-Ofast 
 
 CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 

@@ -6,12 +6,11 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:19:30 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/23 13:01:03 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/23 13:23:24 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 int	main(int ac, char **av)
 {
