@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file8.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 22:09:02 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/23 08:03:02 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/23 13:01:21 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,19 @@ void	free_map(char **map)
 	free(map);
 }
 
+void	ft_free_matrix(int **str, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
 void	free_all_parsing(t_map_info *map_info)
 {
 	int	i;
@@ -59,7 +72,10 @@ void	free_all_parsing(t_map_info *map_info)
 	ft_free_matrix(map_info->map1, map_info->map1_height);
 	i = 0;
 	while (map_info->texture[i])
+	{
 		free(map_info->texture[i]);
+		i++;
+	}
 	if (map_info->img)
 		free (map_info->img);
 }

@@ -1,12 +1,12 @@
+NO ./textures/bluestone.xpm
 
+WE ./textures/colorstone.xpm
 
+SO ./textures/wall_tex_a.xpm
 
+EA ./textures/wood.xpm
 C 10,10,10
-NO                    /User     s/arabiai/Desktop/Cube3D/mandatory/textures/space0_1.xpm
-WE /Users/arabiai/Desktop/Cube3D/mandatory/textures/orange.xpm
 F 50,50,54
-SO /Users/arabiai/Desktop/Cube3D/mandatory/textures/octopus.xpm
-EA        /Users/arabiai/Desktop/Cube3D/mandatory/textures/lwodo7.xpm
 
 
 
