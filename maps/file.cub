@@ -1,13 +1,12 @@
-NO ./textures/greystone.xpm 
-WE ./textures/greystone.xpm  
-SO ./textures/greystone.xpm
-EA ./textures/lwodo7.xpm 
-F 56, 14, 46
-C 44, 44, 80
-
+NO ./textures/l7abss.xpm
+SO ./textures/mincraft.xpm
+WE ./textures/space0_1.xpm
+EA ./textures/wood.xpm
+F 56, 39, 46
+C 44, 44, 45
 
   11111111 111111111111111
-  10N0000010001000000000001
+  10W0000010001000000000001
   1000000001111100000000001
   100000000000000000000001
   100000111110000101010001

@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 08:40:40 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/23 13:18:58 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/23 13:45:06 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,21 @@ void	get_coord_direct(t_map_info *mp, char direc)
 	{
 		mp->info_player->dirx = 0;
 		mp->info_player->planey = 0.0;
-		mp->info_player->diry =1.0;
+		mp->info_player->diry = 1.0;
 		mp->info_player->planex = 0.66;
 		if (direc == 'W')
 		{
-			mp->info_player->diry = - 1.0;
+			mp->info_player->diry = -1.0;
 			mp->info_player->planex = -0.66;
 		}
 	}
 	else if (direc == 'N' || direc == 'S')
 	{
-		mp->info_player->dirx = 1.0;
+		mp->info_player->dirx = -1.0;
 		mp->info_player->planey = -0.66;
 		if (direc == 'S')
 		{
-			mp->info_player->dirx = - 1.0;
+			mp->info_player->dirx = 1.0;
 			mp->info_player->planey = 0.66;
 		}
 		mp->info_player->diry = 0.0;
