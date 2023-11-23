@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/23 13:41:24 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/23 13:48:45 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	add_algo(t_raycast *rc, t_map_info *mp)
 		{
 			rc->sidedisty += rc->deltadisty;
 			rc->mapy += rc->stepy;
-			mp->textur = mp->texture[3];
+			mp->textur = mp->texture[2];
 			if (rc->raydiry > 0)
-				mp->textur = mp->texture[2];
+				mp->textur = mp->texture[3];
 		}
 		if (mp->map1[rc->mapx][rc->mapy] > 0)
 			hit = 1;
