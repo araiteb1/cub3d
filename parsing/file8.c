@@ -6,7 +6,7 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 22:09:02 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/23 13:57:28 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/23 15:21:24 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	check_is_digit(char *line)
 	while (tmp_line[i])
 	{
 		if (!ft_isdigit(tmp_line[i]))
-			return (1);
+			return (free(tmp_line), 1);
 		i++;
 	}
-	return (0);
+	return (free(tmp_line), 0);
 }
 
 void	free_map_info(t_map_info *map_info)
