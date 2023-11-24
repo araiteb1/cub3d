@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:21 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/23 08:03:53 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/24 16:35:13 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	close_win(t_map_info *mp)
 	ft_free_matrix(mp->map1, mp->map1_height);
 	if (mp->img)
 		free (mp->img);
-	exit (0);
 	return (1);
 }
 

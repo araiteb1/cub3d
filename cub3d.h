@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:17:03 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/24 11:41:28 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/24 16:29:53 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_player
 
 typedef struct s_raycast
 {
-	int		line;
+	int		hline;
 	int		start;
 	int		end;
 	double	wallx;

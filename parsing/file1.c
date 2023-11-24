@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 13:19:20 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/24 12:43:06 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/24 16:36:50 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,11 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void ff ()
-{
-	system("leaks cub3D");
-}
-
 void	writing_error(char *str)
 {
 	ft_putstr_fd("Error: ", 1);
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n", 1);
-	atexit(ff);
 	exit(EXIT_FAILURE);
 }
 

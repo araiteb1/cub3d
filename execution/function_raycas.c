@@ -6,7 +6,7 @@
 /*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:30:28 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/23 13:48:45 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/24 16:29:44 by araiteb          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void	draw_line(t_raycast *rc, t_map_info *mp)
 		rc->perp_walldist = rc->sidedistx - rc->deltadistx;
 	else
 		rc->perp_walldist = rc->sidedisty - rc->deltadisty;
-	rc->line = (int)(HEIGHT / rc->perp_walldist);
-	rc->start = -rc->line / 2.0 + HEIGHT / 2.0;
+	rc->hline = (int)(HEIGHT / rc->perp_walldist);
+	rc->start = -rc->hline / 2.0 + HEIGHT / 2.0;
 	if (rc->start < 0)
 		rc->start = 0;
-	rc->end = rc->line / 2.0 + HEIGHT / 2.0;
+	rc->end = rc->hline / 2.0 + HEIGHT / 2.0;
 	if (rc->end >= HEIGHT)
 		rc->end = HEIGHT - 1;
 	if (mp->textur == mp->texture[0] || mp->textur == mp->texture[1])
