@@ -6,7 +6,7 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:58:19 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/21 21:16:26 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:32:13 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_paths(t_map_info *map_info)
 	i = 0;
 	while (i < 4)
 	{
-		if (access(map_info->paths[i], F_OK) == -1)
+		if (open(map_info->paths[i], O_RDONLY) == -1)
 			return (1);
 		i++;
 	}

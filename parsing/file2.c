@@ -6,7 +6,7 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:53:55 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/21 17:56:28 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:39:00 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	fill_textures(t_map_info *map_info, char *line)
 	if (tmp_line[ft_strlen(tmp_line) - 1] == '\n')
 		tmp_line[ft_strlen(tmp_line) - 1] = '\0';
 	if (help_fill_textures(map_info, tmp_line))
-		return (free(tmp_line), 1);
+		return (free(tmp_line), free(line), 1);
 	return (free(tmp_line), 0);
 }
 
@@ -103,6 +103,9 @@ int	help_read_textures(t_map_info *map_info, char *line, int *nb_textures)
 		(*nb_textures)++;
 	}
 	else
+	{
+		free(line);
 		writing_error("Textures Missign");
+	}
 	return (0);
 }

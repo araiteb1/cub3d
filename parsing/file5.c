@@ -6,7 +6,7 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:45:53 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/21 18:16:25 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:28:35 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	read_map(t_map_info *map_info)
 			if (skip_textures(map_info, line))
 				nb_textures++;
 			if (nb_textures > 6)
-				return (1);
+				return (free(line), 1);
 			free(line);
 			line = get_next_line(fd);
 		}

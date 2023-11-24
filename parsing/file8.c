@@ -6,7 +6,7 @@
 /*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 22:09:02 by ahaloui           #+#    #+#             */
-/*   Updated: 2023/11/23 15:21:24 by ahaloui          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:41:18 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,20 @@ int	check_is_digit(char *line)
 
 void	free_map_info(t_map_info *map_info)
 {
-	free(map_info->no_texture);
-	free(map_info->so_texture);
-	free(map_info->we_texture);
-	free(map_info->ea_texture);
-	free(map_info->c_texture);
-	free(map_info->f_texture);
+	if (map_info->info_player)
+		free(map_info->info_player);
+	if (map_info->no_texture)
+		free(map_info->no_texture);
+	if (map_info->so_texture)
+		free(map_info->so_texture);
+	if (map_info->we_texture)
+		free(map_info->we_texture);
+	if (map_info->ea_texture)
+		free(map_info->ea_texture);
+	if (map_info->c_texture)
+		free(map_info->c_texture);
+	if (map_info->f_texture)
+		free(map_info->f_texture);
 	free(map_info);
 }
 
