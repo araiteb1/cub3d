@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: araiteb <araiteb@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloui <ahaloui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:33:46 by araiteb           #+#    #+#             */
-/*   Updated: 2023/11/23 14:10:50 by araiteb          ###   ########.fr       */
+/*   Updated: 2023/11/24 11:19:27 by ahaloui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	check_if_wall(t_map_info *mp, double dx, double dy)
 {
 	if (mp->map1[(int)(mp->info_player->x_pos + dx)]
-		[(int)(mp->info_player->y_pos + dy)] > 0 || mp->map1[(int)(mp->info_player->x_pos)]
+		[(int)(mp->info_player->y_pos + dy)] > 0
+		|| mp->map1[(int)(mp->info_player->x_pos)]
 		[(int)(mp->info_player->y_pos)] > 0)
 		return ;
 	mp->info_player->x_pos += dx;
